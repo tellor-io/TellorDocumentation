@@ -1,0 +1,16 @@
+site_name: Tellor
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - rust
+nav:
+- Home: 
+    - 'About Tellor' : 'index.md'
+- Developer Documentation:
+    - 'Implementing Tellor':  'DevDocumentation.md'
+- User Guide:
+    - 'Using Tellor': 'UsingTellor.md'
+- Maintainers:
+    - 'Maintainers': 'Contributers.md'
