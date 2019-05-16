@@ -1,4 +1,3 @@
-# <span style="color:#06D88C"> Tellor </span>
 
 
 ## User functions <a name="user-fx"> </a>  

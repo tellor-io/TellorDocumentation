@@ -8,9 +8,7 @@ theme:
 nav:
 - Home: 
     - 'About Tellor' : 'index.md'
-- Developer Documentation:
-    - 'Implementing Tellor':  'DevDocumentation.md'
-- User Guide:
+- Developer Documentation: 
+    - 'Deploying Tellor': 'DevDocumentation.md'
     - 'Using Tellor': 'UsingTellor.md'
-- Maintainers:
-    - 'Maintainers': 'Contributers.md'
+- Contributors: 'Contributors.md'

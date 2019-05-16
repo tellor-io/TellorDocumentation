@@ -13,7 +13,7 @@ Tellor implements a hybrid Proof-of-work (PoW)/Proof-of-Stake (PoS) model where 
 
 ## Implementation <a name="Implementation"> </a>
 
-The Tellor Oracle deploys two contracts. TellorMaster is the storage contract and allows for delegate calls from Tellor.sol. The Tellor oracle holds and distributes the token supply, informs miners which values to submit, has a built-in proof-of-stake methodology for challenges, and holds the historically mined values that contracts can read from. 
+The Tellor Oracle deploys two contracts, TellorMaster.sol and Tellor.sol. TellorMaster is the storage contract and allows for delegate calls from Tellor.sol. The Tellor oracle holds and distributes the token supply, informs miners which values to submit, has a built-in proof-of-stake methodology for challenges, and holds the historically mined values that contracts can read from. 
 
 Tellor provides the miners and users the API or data description, along with necessary fields for the data it is collecting and allows miners to submit the proof of work and off-chain data, sorts the values, allows the users to retrieve the values and to bid on which data series is mined next.  Tellor allows for new values to be mined every 10 minutes and which data series is mined is determined by which series has the greatest tip going to the miners.  
 
@@ -21,7 +21,7 @@ Miners are required to stake tributes before they are allowed to mine. The <b>su
 
 The basic flow for adding and retrieving data goes like this: 
 
-1. The user submits a request via the <b>requestData</b> function using Tributes to incentivize miners to choose a query over other submissions. The user needs to specify the API, timestamp and tip. Once a user submits a query the API will get an unique ID assigned to it and if the tip submitted for the request is larger than that of the current query on queue the current request will replace it via the <b>updateAPIonQ</b> function. 
+ 1. The user submits a request via the <b>requestData</b> function using Tributes to incentivize miners to choose a query over other submissions. The user needs to specify the API, timestamp and tip. Once a user submits a query the API will get an unique ID assigned to it and if the tip submitted for the request is larger than that of the current query on queue the current request will replace it via the <b>updateAPIonQ</b> function. 
 
 These are the requestData and updateAPIonQ functions:
 ```solidity
@@ -103,11 +103,11 @@ These are the requestData and updateAPIonQ functions:
         emit TipAdded(msg.sender,_requestId,_tip,self.requestDetails[_requestId].apiUintVars[keccak256("totalTip")]);
     }
 ```
-2. Other users who want the same API data, they pay or ‘Addtip’ this data series so miners are further incentivized to mine it. If the API has already been requested, the <b>requestData</b> function will automatically add to the previously submitted query to create a pool and help push the query up the queue.
+ 2. Other users who want the same API data, they pay or ‘Addtip’ this data series so miners are further incentivized to mine it. If the API has already been requested, the <b>requestData</b> function will automatically add to the previously submitted query to create a pool and help push the query up the queue.
 
-3. Every 10 minutes, the Oracle provides a new challenge along with the data series for miners to mine. 
+ 3. Every 10 minutes, the Oracle provides a new challenge along with the data series for miners to mine. 
 
-4. Miners can stake using the <b>depositStake</b> function and the stake will be locked for a minimum time period. Also, if a dispute against a miner is raised, the stake is locked through the dispute process. The stake is locked in the doTranfer and approve functions via the allowedToTrade function (which checks the balance avaiable for transfer or approval and excludes any stake amount).
+ 4. Miners can stake using the <b>depositStake</b> function and the stake will be locked for a minimum time period. Also, if a dispute against a miner is raised, the stake is locked through the dispute process. The stake is locked in the doTranfer and approve functions via the allowedToTrade function (which checks the balance avaiable for transfer or approval and excludes any stake amount).
 
 ```solidity
     /**
@@ -146,7 +146,7 @@ These are the requestData and updateAPIonQ functions:
 
 Contact us if you are interested on becoming an early miner. 
 
-5. Miners then submit their PoW solution, requestId, and off-chain data point to the Tellor contract via the <b>submitMiningSolution</b> function. The function sorts the values as they come in and as soon as five values are received the official value is selected and saved on-chain. The miners are then allocated their payout (base reward and tips). the miner with the median value is given the highest reward since that will become the 'official' value and the other four miners get a lower reward that decreases the further they are from the median. The next API to mine is set at this time based on the request on queue(on deck) or the API with the highest payout. This allows the users to bid their request up to the queue until the next value is mined.  
+ 5. Miners then submit their PoW solution, requestId, and off-chain data point to the Tellor contract via the <b>submitMiningSolution</b> function. The function sorts the values as they come in and as soon as five values are received the official value is selected and saved on-chain. The miners are then allocated their payout (base reward and tips). the miner with the median value is given the highest reward since that will become the 'official' value and the other four miners get a lower reward that decreases the further they are from the median. The next API to mine is set at this time based on the request on queue(on deck) or the API with the highest payout. This allows the users to bid their request up to the queue until the next value is mined.  
 
 ```solidity
     /**
@@ -293,7 +293,7 @@ Contact us if you are interested on becoming an early miner.
 
 ```
 
-6. Anyone holding Tellor Tributes can dispute the validity of a mined value within 144 blocks of it being mined by “staking” a fee via the <b> beginDispute </b> function.  Tribute holders will vote on the validity of the data point. If the vote determines the value was invalid the reporting party gets awarded the miner's stake, otherwise the wrongly accused miner gets the reporting fee. Votes are weighted based on the amount of tributes held by the mining party at the time of voting (block.number). The miner under dispute is barred from voting. 
+ 6. Anyone holding Tellor Tributes can dispute the validity of a mined value within 144 blocks of it being mined by “staking” a fee via the <b> beginDispute </b> function.  Tribute holders will vote on the validity of the data point. If the vote determines the value was invalid the reporting party gets awarded the miner's stake, otherwise the wrongly accused miner gets the reporting fee. Votes are weighted based on the amount of tributes held by the mining party at the time of voting (block.number). The miner under dispute is barred from voting. 
 
 The miner's stake is "locked" when a dispute is initiated, since <b>beginDispute </b>  changes their stake state to 3. Miners have to call <b>requestStakingWithdraw</b> and wait 7 days before they can call <b>withdrawStake</b> to unstake their stake and their state has to be 2 and the minimum stake time has elapsed. The stake state for the miner will return to 1 once the <b>tallyVotes</b> is ran, if the vote is on their favor, otherwise they lose their stake to the party that reported them and their stake state is marked as 2 and the stake amount as zero.  
 
