@@ -1,4 +1,8 @@
+<!---
+mkdocs serve
+http://127.0.0.1:8000/
 <span style="color:#06D88C"> Tellor </span>
+-->
 
 ## Overview <a name="overview"> </a>  
 Ethereum smart contracts cannot access off-chain data. If your smart contract relies on off-chain (e.g. internet) data to evaluate or execute a function, you either have to manually feed the data to your contract, incentivize users to do it, or rely on a centralized party to provide the data (Oraclize.it is generally the standard). 

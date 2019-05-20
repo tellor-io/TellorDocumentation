@@ -6,9 +6,17 @@ theme:
         - yaml
         - rust
 nav:
-- Home: 
-    - 'About Tellor' : 'index.md'
-- Developer Documentation: 
+- Tellor: 
+    - 'What is Tellor?' : 'index.md'
+- Integrating Tellor into Smart Contracts:
+      - 'User Contracts': 'UserSetup.md'
+      - 'User Walkthrough': 'UserWalk.md'
+- Become a Miner: 
+      - 'Miner Implementation': 'MinerSetup.md'
+      - 'Miner Walkthrough': 'MinerWalk.md' 
+- Data Sources Supported: 'DataSources.md'
+- Functions: 
     - 'Deploying Tellor': 'DevDocumentation.md'
-    - 'Using Tellor': 'UsingTellor.md'
+    - 'User Functions' : 'UserFunctions.md'
+    - 'Miner Functions' : 'MinerFunctions.md'
 - Contributors: 'Contributors.md'
