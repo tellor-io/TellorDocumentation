@@ -58,10 +58,10 @@ Follow the steps below to launch the Oracle contracts using Truffle.
     $   truffle test
 ```
 *  And wait for the message 'START MINING RIG!!'
-*  Kick off the python miner file [./miner/testMinerB.py](./miner/testMinerB.py).
+*  Kick off the python miner file [./miner/testMinerB.py](https://github.com/tellor-io/TellorCore/tree/master/miner/testMinerB.py).
 
 
-Production and test python miners are available under the miner subdirectory [here](./miner/). You will need to get at least 5 miners running.
+Production and test python miners are available under the miner subdirectory [here](https://github.com/tellor-io/TellorCore/tree/master/miner). You will need to get at least 5 miners running.
 
-Step by step instructions on setting up a Tellor Oracle without truffle are available here: [Detailed documentation for self setup](./SetupDocumentation.md)
+Step by step instructions on setting up a Tellor Oracle without truffle are available here: [Detailed documentation for self setup](https://tellor.readthedocs.io/en/latest/DevDocumentation/)
 

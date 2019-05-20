@@ -5,6 +5,8 @@ theme:
     hljs_languages:
         - yaml
         - rust
+        - javascript
+        - solidity
 nav:
 - Tellor: 
     - 'What is Tellor?' : 'index.md'

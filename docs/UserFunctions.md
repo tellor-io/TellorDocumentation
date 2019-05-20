@@ -23,9 +23,7 @@ where:
 * <b>addTip</b> function allows the user to increase the payout for a specific request
 
 ```solidity
-    function addTip(uint _requestId, uint _tip) external {
-        tellor.addTip(_requestId,_tip);
-    }
+    addTip(uint _requestId, uint _tip)
 ```
 
 where:
@@ -37,7 +35,7 @@ To read data, users will need to call these two functions:
 
 * <b>retreiveData</b> function allows the user to read the data for the given API and timestamp
 ```javascript
-oracle.retrieveData(uint _requestId, uint _timestamp)
+retrieveData(uint _requestId, uint _timestamp)
 ```
 where:
 
@@ -49,7 +47,7 @@ where:
 * <b>getLastQuery</b> function allows the user to read data from the latest API and timestamp mined. 
 
 ```javascript
-oracle.getLastNewValue()
+getLastNewValue()
 ```
 
 This is an example of a function that would need to be added to a contract so that it can read data from an oracle contact if the contract holds Tributes:
