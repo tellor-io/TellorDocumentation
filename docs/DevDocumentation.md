@@ -1,5 +1,6 @@
+<!--
 <span style="color:#06D88C"> Tellor </span>
-
+--->
 
 ## Contracts Description <a name="Contracts-Description"> </a>
 * <b>Tellor.sol</b> -- is the Tellor oracle contract and it allows miners to submit the proof of work, requestId, and value, sorts the values, pays the miners, allows the data users to request data and "tip" the miners to incentivize them to provide values, allows the users to retrieve and dispute the values.
