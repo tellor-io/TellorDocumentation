@@ -7,8 +7,8 @@
     * <b>Tellor.sol</b> --contains all the functions
        * <b>TellorLibrary.sol</b> --contains the logic for the functions in Tellor.sol
     * <b>TellorMaster.sol</b> -- contains the delegate calls to allow Tellor.sol to write to the TellorGetters.sol. TellorMaster is TellorGetters.sol
-       * <b>TellorGetters.sol</b> -- stores all the Tellor.sol variables 
-       * <b>TellorGettersLibrary.sol</b> --contains the logic for the functions in TellorGetters.sol
+        * <b>TellorGetters.sol</b> -- stores all the Tellor.sol variables 
+        * <b>TellorGettersLibrary.sol</b> --contains the logic for the functions in TellorGetters.sol
 
 
 ## Scripts Description <a name="Scripts-Description"> </a>
@@ -39,33 +39,26 @@ On contracts use “is usingTellor” to access these functions: requestData, re
 ## Instructions for quick start with Truffle Deployment <a name="Quick-Deployment"> </a> 
 Follow the steps below to launch the Oracle contracts using Truffle. 
 
-1. Open two terminals.
-
-2. On one terminal run:
+*  Open two terminals.
+*  On one terminal run:
     Clone the repo, cd into it, and then run:
-
     $ npm install
-
     $ truffle compile
-
     $ truffle migrate
-
     $ truffle exec scripts/01_DeployTellor.js
 
 ### Testing through Truffle<a name="testing"> </a>
-
-
-3. On the second termial run:
+*  On the second termial run:
 ```solidity
    $ ganache-cli -m "nick lucian brenda kevin sam fiscal patch fly damp ocean produce wish"
 ```
-4. On the first terminal run: 
+*  On the first terminal run: 
+
 ```solidity
     $   truffle test
 ```
-5. And wait for the message 'START MINING RIG!!'
-
-6. Kick off the python miner file [./miner/testMinerB.py](./miner/testMinerB.py).
+*  And wait for the message 'START MINING RIG!!'
+*  Kick off the python miner file [./miner/testMinerB.py](./miner/testMinerB.py).
 
 
 Production and test python miners are available under the miner subdirectory [here](./miner/). You will need to get at least 5 miners running.

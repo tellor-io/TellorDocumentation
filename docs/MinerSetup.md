@@ -1,4 +1,10 @@
-## under construction
+## Documentation under construction
+
+## Staking
+
+## Slashing
+
+## Rewards
 
 ## Download Miner
 
