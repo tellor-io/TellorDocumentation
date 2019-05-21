@@ -1,11 +1,34 @@
 ## Miner functions <a name="miner-fx"> </a>  
-Miners engage in a POW competition to find a nonce which satisfies the requirement of the challenge.  The first five miners who solve the PoW puzzle provide the nonce, requestId, and value and receive native tokens in exchange for their work.  The oracle data submissions are stored in contract memory as an array - which is subsequently operated upon to derive the median value and the miner payout. 
+Miners engage in a POW competition to find a nonce which satisfies the requirement of the challenge.  The first five miners who solve the PoW puzzle provide the nonce, requestId, and value and receive native tokens in exchange for their work.  The oracle data submissions are stored in contract memory as an array - which is subsequently operated upon to derive the median value.
+
+## depositStake()
+
+This function allows miners to deposit their stake.
+
+```javascript
+depositStake() 
+```
+## requestStakingWithdraw()
+
+This funciton allows the miner to initiate their stake withdraw. Once the request is initiated there is a 7 day waiting period before being able to withdraw. The miner must be in good standing(not under dispute) to be able to initiate this request.
+
+```javascript
+requestStakingWithdraw()
+```
+
+## withdrawStake()
+
+This funtion allows miners to withdraw their stake once the 7 day waiting period has expired. The miner must be in good standing(not under dispute) to be able to withdraw. 
+
+```javascript
+withdrawStake()
+```
 
 ## getCurrentVariables
 Miners need to extract the current challenge, requestId and difficulty by calling the getCurrentVariables function before they can begin solving the PoW.
 
 ```javascript
-oracle.getCurrentVariables()
+getCurrentVariables()
 ```
 
 The getCurrentVariables solidity function returns all the necessary variables. 
@@ -18,7 +41,7 @@ The getCurrentVariables solidity function returns all the necessary variables.
 Miners can use the submitMiningSolution function to submit the PoW, requestId, and off-chain value. Production and test python miners are available under the miner subdirectory [here](./miner/).  The PoW challenge is different than the regular PoW challenge used in Bitcoin. 
 
 ```javascript
-oracle.submitMiningSolution(string nonce, uint _requestId, uint value)
+submitMiningSolution(string nonce, uint _requestId, uint value)
 ```
 where 
   * nonce -- is the solution string submitted by miner

@@ -3,7 +3,7 @@
 ### Step 1: Ensure the provided data source returns a value
 Link to our tool to check this: Coming soon!
 
-### Step 2: Get Tributes
+### Step 2: Get Funds
 Coming soon!
 
 ### Step 3: Request Data
@@ -15,7 +15,7 @@ Coming soon!
     Use the function <b>requestData</b> to submit the data source link and specify the granularity and amount willing to pay to get to the top of the queue. 
 
 ```solidity
-requestData(string calldata _c_sapi,string calldata _c_symbol,uint _requestId,uint _granularity, uint _tip)
+    requestData(string calldata _c_sapi,string calldata _c_symbol,uint _requestId,uint _granularity, uint _tip)
 ```
 
 
@@ -31,9 +31,9 @@ requestData(string calldata _c_sapi,string calldata _c_symbol,uint _requestId,ui
 
 * <b> If a request exists </b>
 
-    If a request exists for the data source and granularity(number of decimal places) on the list:
-	
-    Use the function <b> addTip </b> to add to the payout by specifying the amount and amount to tip.
+    If a request exists for the data source and granularity (number of decimal places) on the list use the add tip functions to raise your prefered request to the top of the queue.
+	  
+    If your contract is funded with Tellor Tributes use the function <b> addTip </b> to add to the payout by specifying the amount to add to the payout (increase the miner tip).
 
 ```solidity
     addTip(uint _requestId, uint _tip)
@@ -42,7 +42,14 @@ requestData(string calldata _c_sapi,string calldata _c_symbol,uint _requestId,ui
 where:
 
   * \_requestId is the ID for the value to be mined
-  * \_tip is the amount the requester is willing to pay to be get on queue
+  * \_tip is the amount the requester is willing to pay to be get on queue in Tributes
+
+    If your contract is funded with Ether use the <b> addTipWithEther</b> function to tip the miners. This function automatically buys Tellor Tributes to fund your tip. 
+
+```solidity
+    addTipWithEther(uint _requestId, uint _tip)
+```
+
 
 
 ### Step 4: Retreive Data or get last query value

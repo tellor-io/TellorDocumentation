@@ -566,6 +566,7 @@ Blockchains are secured via multiple avenues.  The first is in the random select
 ## Mining <a name="mining-process"> </a>
 
 Miners need the following information from the Tellor oracle contract:
+
 * Current Challenge
 * Current Request ID
 * Difficulty
@@ -602,6 +603,7 @@ An implementation of the miner is described in python in the 'miner' sub directo
 
 ### Submission 
 Miners submitting values must submit the following in order to be a valid submission via the <b>proofOfWork</b> function:
+
 * Successful solution
 * request Id
 * Value of referenced query
@@ -634,11 +636,14 @@ This PoW/PoS hybrid model allows for Tellor to take advantage of the efficiency 
 ##### Minimum Cost to Attack Analysis
 
 The cost to successfully attack and break the Tellor oracle is determined by several factors:
+
 1. The price of the oracle Tellor Tributes
 2. Average price (in fiat)  per query (Demand)
 3. Stake amount for mining
 4. Voting share of dev team(in tributes)
+
 where:
+
 P = Price of Tellor Tributes
 D = Average price (in fiat) per query (Demand)
 S = Stake amount in tokens
@@ -689,6 +694,7 @@ If the challenge is deemed successful, the challenger receives the stake of the 
 Within the context of Ethereum, oracles can be thought of as authoritative sources of off-chain data. These data points allow smart contracts to receive and condition executional instructions using extrinsic information.  This is highly useful for a wide-array of derivative scenarios.
 
 As Tellor is a contract mechanism that allows oracle data to be derived in a competitive, decentralized manner - we envision a wide array of use cases for this product.  Namely:
+
 1. <b>Exchange-rate data:</b> interval based exchange-rate values may be used to create trustless financial derivatives
 2. <b>Weather data logs:</b> for example, we may calculate insurance premium calculation based on a weather forecast
 3. <b>Static/pseudo-static data:</b> logging and indexing various identifiers, country codes, currency codes
@@ -721,6 +727,7 @@ Off-chain analysis for detecting outliers and reporting these to “gain” the 
 Tellor provides a decentralized option for off-chain data. We realize the short coming of PoW but as of now it has proven to work so we implemented a hybrid model.  Staking, the dispute mechanism, PoW(randomness) and the selection of the median of the first five values submitted provide the needed pieces for a highly secure oralce that is operable right now. 
 
 By creating an oracle schema that uses an incented construct to derive the validity of off-chain data, we:
+
 * <b>Reduce the risks</b> associated with single-party oracle providers, who can cut access to API data, forge message data, etc
 * <b>Lay the foundation</b> for a superior oracle system where data is derived from a distributed set of participants which have both economic interest and 'stake' in the validity and success of the oracle data
 * <b>Create</b> an effective, secure, and incentivized system for off-chain data which ingests inputs from five random parties(miners) and disincentives dispersion and adversarial submissions 
