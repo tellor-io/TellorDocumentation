@@ -14,7 +14,7 @@ Link to download miner: coming soon!
 
 The miner automatically acomplishes this: 
 
-<b>Step 2.1: getCurrentVariables<b>
+<b>Step 2.1: getCurrentVariables</b>
 
 Miners need to extract the current challenge, requestId and difficulty by calling the getCurrentVariables function before they can begin solving the PoW.
 
