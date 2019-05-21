@@ -1,5 +1,5 @@
 
-Miners are an integral part of Tellor and it is in the best interest of the systme to aling incentives to protect miners and users.
+Miners are an integral part of Tellor and it is in the best interest of the system to aling incentives to protect miners and users.
 
 ## Download Miner
 Link to miner download: coming soon!

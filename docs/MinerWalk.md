@@ -12,7 +12,7 @@ depositStake()
 ## Step 2: Download miner
 Link to download miner: coming soon!
 
-The miner automatically acomplishes this: 
+The miner automatically acomplishes steps 2.1 - 2.3: 
 
 <b>Step 2.1: getCurrentVariables</b>
 
