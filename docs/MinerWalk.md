@@ -3,7 +3,7 @@
 
 ## Step 1: depositStake()
 
-You need 1000 tributes to be able to run this function. It will automatically stake the msg.sender. 
+You need 1000 tributes to be able to run this function (contact us at info@tellor.io). It will automatically stake the msg.sender. 
 
 ```javascript
 depositStake() 

@@ -10,7 +10,7 @@ theme:
 nav:
 - Tellor: 
     - 'What is Tellor?' : 'index.md'
-- Integrating Tellor into Smart Contracts:
+- Integrate Tellor into  your Smart Contracts:
       - 'User Contracts': 'UserSetup.md'
       - 'User Walkthrough': 'UserWalk.md'
 - Become a Miner: 

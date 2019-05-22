@@ -4,7 +4,7 @@
 Link to our tool to check this: Coming soon!
 
 ### Step 2: Get Funds
-Coming soon!
+Contact us at info@tellor.io.
 
 ### Step 3: Request Data
 
