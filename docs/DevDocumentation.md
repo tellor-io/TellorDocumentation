@@ -5,11 +5,14 @@
 ## Contracts Description <a name="Contracts-Description"> </a>
 * <b>Tellor.sol</b> -- is the Tellor oracle contract and it allows miners to submit the proof of work, requestId, and value, sorts the values, pays the miners, allows the data users to request data and "tip" the miners to incentivize them to provide values, allows the users to retrieve and dispute the values.
     * <b>Tellor.sol</b> --contains all the functions
-       * <b>TellorLibrary.sol</b> --contains the logic for the functions in Tellor.sol
+       * <b>TellorDispute.sol</b> --contains the dispute functions' logic for the functions in Tellor.sol
+       * <b>TellorLibrary.sol</b> --contains the logic for the functions in Tellor.sol relating to requesting data and submitting mined values.
+       * <b>TellorStake.sol</b> --contains the staking functions' logic for the functions in Tellor.sol
+       * <b>TellorStorage.sol</b> --contains the storage variables used in Tellor.sol
+       * <b>TellorTransfer.sol</b> --contains the transfer and ERC20 functions' logic for the functions in Tellor.sol
     * <b>TellorMaster.sol</b> -- contains the delegate calls to allow Tellor.sol to write to the TellorGetters.sol. TellorMaster is TellorGetters.sol
-        * <b>TellorGetters.sol</b> -- stores all the Tellor.sol variables 
-        * <b>TellorGettersLibrary.sol</b> --contains the logic for the functions in TellorGetters.sol
-
+       * <b>TellorGetters.sol</b> -- stores all the Tellor.sol variables 
+       * <b>TellorGettersLibrary.sol</b> --contains the logic for the functions in TellorGetters.sol
 
 ## Scripts Description <a name="Scripts-Description"> </a>
 
@@ -30,7 +33,11 @@ TellorMaster(Tellor.address); //where the tellor.address is the address of the d
 ```
 
 <!---
-
+TellorLibrary();
+TellorStake();
+TellorStorage();
+TellorTransfer();
+TellorGetters();
   $ npm install tellor
 
 On contracts use “is usingTellor” to access these functions: requestData, retreiveData,  getLastQuery.
@@ -64,4 +71,6 @@ Follow the steps below to launch the Oracle contracts using Truffle.
 Production and test python miners are available under the miner subdirectory [here](https://github.com/tellor-io/TellorCore/tree/master/miner). You will need to get at least 5 miners running.
 
 Step by step instructions on setting up a Tellor Oracle without truffle are available here: [Detailed documentation for self setup](https://tellor.readthedocs.io/en/latest/DevDocumentation/)
+
+
 

@@ -496,7 +496,7 @@ contract Oracle is usingTellor {
 ```
 
 #### Dev Share
-The Tellor Oracle implements a ten percent dev share.  This dev share will be managed by the Daxia team and utilized in the following ways:
+The Tellor Oracle implements a ten percent dev share.  This dev share will be managed by the Tellor team and utilized in the following ways:
 * Ensure accurate voting by taking part in PoS challenges
 * Create and distribute efficient miners
 * Market and Promote the Tellor Oracle to ensure adoption which leads to greater mining incentives
