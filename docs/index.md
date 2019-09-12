@@ -9,7 +9,7 @@ Ethereum smart contracts cannot access off-chain data. If your smart contract re
 
 <b>The tellor oracle</b> is a decentralized oracle. It provides a decentralized alternative for contracts to interact with and obtain data from off-chain (aka API data). 
 
-Tellor implements a hybrid Proof-of-work (PoW)/Proof-of-Stake (PoS) model where miners have to stake tellor tributes (tellor's native token) to be able to mine and along with the PoW solution they also provide an off-chain data point. The first five miners to provide the PoW and off-chain data point are rewarded, the median becomes the official value and the value is available for on-chain contracts to use. The value can be disputed by anyone holding tellor tributes within 144 blocks(1 day) after being mined for a fee. After the value goes to dispute, anyone holding tributes can vote on it's validity. If the vote determines the value was invalid the reporting party gets awarded the miner's stake, otherwise the wrongly accused miner gets the reporting fee. 
+Tellor implements a hybrid Proof-of-work (PoW)/Staking model where miners have to stake tellor tributes (tellor's native token) to be able to mine and along with the PoW solution they also provide an off-chain data point. The first five miners to provide the PoW and off-chain data point are rewarded, the median becomes the official value and the value is available for on-chain contracts to use. The value can be disputed by anyone holding tellor tributes within 144 blocks(1 day) after being mined for a fee. After the value goes to dispute, anyone holding tributes can vote on it's validity. If the vote determines the value was invalid the reporting party gets awarded the miner's stake, otherwise the wrongly accused miner gets the reporting fee. 
 
 <p align="center">
 <img src="./img/ProcessFlow.png"  alt = "How it works">
@@ -17,7 +17,7 @@ Tellor implements a hybrid Proof-of-work (PoW)/Proof-of-Stake (PoS) model where 
 
 ## Implementation <a name="Implementation"> </a>
 
-The Tellor Oracle deploys two contracts, TellorMaster.sol and Tellor.sol. TellorMaster is the storage contract and allows for delegate calls from Tellor.sol. The Tellor oracle holds and distributes the token supply, informs miners which values to submit, has a built-in proof-of-stake methodology for challenges, and holds the historically mined values that contracts can read from. 
+The Tellor Oracle deploys two contracts, TellorMaster.sol and Tellor.sol. TellorMaster is the storage contract and allows for delegate calls from Tellor.sol. The Tellor oracle holds and distributes the token supply, informs miners which values to submit, has a built-in staking methodology for challenges, and holds the historically mined values that contracts can read from. 
 
 Tellor provides the miners and users the API or data description, along with necessary fields for the data it is collecting and allows miners to submit the proof of work and off-chain data, sorts the values, allows the users to retrieve the values and to bid on which data series is mined next.  Tellor allows for new values to be mined every 10 minutes and which data series is mined is determined by which series has the greatest tip going to the miners.  
 
@@ -512,7 +512,7 @@ The next subsections provide further details and goals of the reward incentives 
 
 ### 1. Rewards for PoW submissions
 
-Miners are given two types of rewards for the PoW:
+Miners are given two types of rewards: 
 * [A base reward per every successful submission](#base-reward) 
 * [Tips given to miners to incentivize the selection of algorithm](#tips)
 
@@ -521,9 +521,24 @@ The next two subsections provide further details and goals of these.
 #### A base reward per every successful submission <a name="base-reward"> </a>
 The base reward incentivizes miners to provide data via the PoW and its pay structure incentivizes them to provide accurate values. 
 
-Similar to the way Ethereum rewards ‘Uncles’ or miners who were close to winning, the first five miners to submit a PoW, requestId and off-chain value are awarded tributes. The miner that submits the median value is awarded the largest quantity of the total payoff. The median value is selected efficiently via an insert sort in the <b>submitMiningSolution</b> function.
+Similar to the way Ethereum rewards ‘Uncles’, or miners who were close to winning, the first five miners to submit a PoW and off-chain value are awarded the five Tributes each.  
 
-The current incentive structure leverages game-theory to disincentivize dispersion and adversarial submissions. The payout structure is specified when deploying a new oracle. 
+Tellor took into consideration two main problems when structuring payouts for our reward mechanisms:
+
+* Race Conditions
+* Mirroring
+Race conditions occur when a user can see a pending transaction on Ethereum and then submit their own transaction with a higher gas price to front run this transaction. The main problem with race conditions in Tellor is that users will waste all of the potential mining reward on gas to outbid one another. When this happens, the security of our system goes down because as the expected return (mining reward minus gas costs) decreases, so does the PoW difficulty of our system.
+
+Mirroring is when parties copy the previous submission’s value. So if you have 5 miners submitting the price of BTC, a properly functioning system does not feature everyone just copying the first miner’s submission. The goal of the five separate miners is for each miner to independently check the value and report it. When mirroring occurs, there is only one miner who is actually checking the value, thus reducing your n number of miners securing your system to one.
+
+Based on Tellor’s research, the following conclusions can be made:
+
+* Higher payout for median value encourages race conditions and mirroring
+* Rewarding the median leads to bad values
+* When all miners are rewarded equally race conditions are reduced, but mirroring remains
+* Mirroring occurs when bad actors are absent
+
+The official value will still be the median value but all miners will receive equal rewards. If Tellor solely takes the first submitted value, the cost of attack for POW would decrease. Race conditions will still occur but with less severity than when the median value is paid a higher reward. In addition, since we anticipate mirroring to be a problem and the only way to prevent it is to actually submit fake values on occasion to keep the system honest we plan to police the environment by using utilizing our devshare to submit malicious values if a sufficient number are not present.
 
 
 Tellor Base Reward Mechanism  
@@ -532,22 +547,22 @@ Tellor Base Reward Mechanism
 <img src="./public/RewardMechanism.PNG"   alt = "reward">
 </p>
 
-The data collection is decentralized since mining, and by extension data submission, is open to everyone who stakes. To avoid dispersion, incentives are structured to provide the highest reward to the miner that submits the median value. Using the median value instead of the average protects the value from being manipulated by a single party submitting an extreme value. To ensure data availability, multiple parties are incentivized to submit data by rewarding the first five miners that submit the PoW and of-chain data point. 
+The data collection is decentralized since mining, and by extension data submission, is open to everyone who stakes.  Using the median value instead of the average protects the value from being manipulated by a single party submitting an extreme value. To ensure data availability, multiple parties are incentivized to submit data by rewarding the first five miners that submit the PoW and of-chain data point. 
 
-Miners are rewarded with tributes. Trubutes are charged for data requests. This gives each token value, and more importantly, the value goes up as more smart contracts use Tellor, thus creating a stronger incentive for miners to continue to mine and provide accurate values.
+Miners are rewarded with Tributes. Trubutes are charged for data requests. This gives each token value, and more importantly, the value goes up as more smart contracts use Tellor, thus creating a stronger incentive for miners to continue to mine and provide accurate values.
 
 
 #### Tips given to miners to incentivize the selection of algorithm <a name="tips"> </a>
 
-Users incentivize miners to retrieve their value by posting a bounty to ensure the query they are interested on is mined. Akin to paying a higher gas fee for a prioritized transaction, this is a tip to the miners and is paid out in the same staggered reward structure as the base reward. As the ecosystem expands (increasing number of DApps and the value hosted on these), securing data to finalize or execute a contract will lead to higher tips and higher incentivization of miners to continue to mine.
+Users incentivize miners to retrieve their value by posting a bounty to ensure the query they are interested on is mined. Akin to paying a higher gas fee for a prioritized transaction, this is a tip to the miners and is paid out evenly to the five miners.  As the ecosystem expands, securing data to finalize or execute a contract will lead to higher tips and higher incentivization of miners to continue to mine.
 
-Since the time target of the oracle is 10 minutes, there are only 144 queries per day on average.  As the Tellor oracle is adopted, the queue will fill and price competitions will take place.  This is a self-fulfilling cycle as adoption increases so does demand, miner rewards, security and further adoption. 
+Since the time target of the oracle is 10 minutes, there are only 144 queries per day on average.  As the Tellor oracle is adopted, the queue will fill and price competitions will take place. This is a self fulfilling cycle as adoption increases so does demand, miner rewards, security and ergo further adoption. 
 
 
 ### 2. Structural incentives to promote accurate value submissions
 
 Miners are incentivized to provide accurate values through 3 processes:
-* [Mining rewards are based upon submission of median value](#uncles)
+* [Mining rewards are given to first five miners and the median value becomes the official value](#uncles)
 * [Every miner required to stake 1000 tokens](#staking)
 * [Every accepted value can be challenged and put to vote by all Tellor Tribute holders](distputes)
 
@@ -557,10 +572,10 @@ The next three subsections provide further details and goals of these.
 Uncle rewards can be used to reduce the chance of a miner gaining 51% of hashing power a smart contract pays miners to mine uncles. The Tellor Oracle utilizes uncles by rewarding  five miners per data value instead of just one. 
 
 #### Every miner required to stake 1000 tokens <a name="staking"> </a>
-Miners have to stake 1000 Tributes to be able to mine. Proof-of-stake allows for economic penalties to miners submitting incorrect values. Parties pay to report a miner providing false data, which leads to the report going to a vote (all Tribute holders can vote, the duration of the vote dictates how long the “bad” miner is frozen from mining).  If found guilty, the malicious miner’s stake goes to the reporter; otherwise the fee paid by the reporter is given to the wrongly accused miner. 
+Miners have to stake 1000 Tributes to be able to mine. Staking allows for economic penalties to miners submitting incorrect values. Parties pay to report a miner providing false data, which leads to the report going to a vote (all Tribute holders can vote, the duration of the vote dictates how long the “bad” miner is frozen from mining).  If found guilty, the malicious miner’s stake goes to the reporter; otherwise the fee paid by the reporter is given to the wrongly accused miner. 
 
 #### Every accepted value can be challenged and put to vote by any Tellor token holder <a name="disputes"> </a>
-Blockchains are secured via multiple avenues.  The first is in the random selection process provided by PoW.  The second is that even if the first security measure fails, the blockchain can create forks and different chains until the honest miners win out.  Since our oracle system does not have the ability to fork easily, Tellor implements a finality period of 144 blocks(1 day) after original data submissions.  This allows for parties to challenge data submissions and multiplies the cost to break the network by the number implicit successful confirmations needed (144 blocks without a challenge). 
+Blockchains are secured via multiple avenues.  The first is in the random selection process provided by PoW.  The second is that even if the first security measure fails, the blockchain can create forks and different chains until the honest miners win out.  Since our oracle system does not have the ability to fork easily, Tellor implements a finality period of one day after original data submissions by allowing  parties to challenge data submissions and multiplies the cost to break the network by the number implicit successful confirmations needed (144 blocks without a challenge). 
 
 
 ## Mining <a name="mining-process"> </a>
@@ -626,12 +641,18 @@ All of these requirements are enforced in the proofOfWork function.
 
 ## Security <a name="security"> </a>
 
-#### Cost of attack
-Security is achieved through the oracle’s architecture (mining algorithm and selection process for median value) and incentives implemented for miners to promptly submit the correct values (see the “Incentives” section for further details).   Ultimate security however is provided by the Proof-of-Stake dispute resolution.  Since any value that is disputed will be put to a vote by all token holders, the simple cost to break is:
+#### Security
+Security is achieved through the oracle’s architecture (mining algorithm and selection process for median value) and incentives implemented for miners to promptly submit the correct values (see the “Incentives” section for further details).   Ultimate security however is provided by the Staking dispute resolution.  Since any value that is disputed will be put to a vote by all token holders, the simple cost to break is:
 
   Token Holder Voting Share X Price of Tributes
 
 This PoW/PoS hybrid model allows for Tellor to take advantage of the efficiency and minimalism of a pure PoW design as well as the final security of PoS.  The main problem with PoW consensus mechanisms is that 51% attacks are relatively trivial on smaller chains.  The problem with a pure PoS mechanism is that stakers are not properly incentivized to mine (since usually economic punishments are needed) and the general security of negative reinforcement properties do not promote competition in speed and accuracy.  Both of these issues are solved through Tellor’s hybrid model and the security of the  Oracle should suffice for relatively large purposes shortly after launch.  
+
+Looking at our formula, we can summarize that security increases when:
+
+* The share of token holders voting PoS disputes increases
+* The price of the token increases
+* Demand for the Oracle increases (tips)
 
 ##### Minimum Cost to Attack Analysis
 
@@ -684,10 +705,13 @@ We can summarize that security increases when:
 
 Tellor implements a finality period of 10 blocks after original data submissions.  This allows for any party to challenge data submissions and multiplies the cost to break the network by the number implicit successful confirmations needed (144 blocks without a challenge).
 
-A challenger must submit a stake to each challenge.  Once a challenge is submitted, the miner who submitted the value is placed in a locked state.  For the next week, tribute holders vote on the validity of the mined value.   A proper submission is one that corresponds to a valid API query within the time period between the release of the challenge and the submission of the value.  
+A challenger must submit a stake to each challenge.  Once a challenge is submitted, the miner who submitted the value is placed in a locked state.  For the next week, tribute holders vote on the validity of the mined value.  All Tribute holders have an incentive to maintain an honest Oracle and can vote on the dispute. A proper submission is one that corresponds to a valid API query within the time period between the release of the challenge and the submission of the value.  
 
-If the challenge is deemed successful, the challenger receives the stake of the malicious miner.  If the challenge is deemed unsuccessful, the honest miner receives the challenger's stake.
+If found guilty, the malicious miner’s stake goes to the reporter; otherwise the fee paid by the reporter is given to the wrongly accused miner. 
 
+#### Requested Data descriptions
+
+Tellors system allows for purely on-chain requests (complete API query strings), but will also work over time to build out robust, standardized series based upon request ID.  To give an example, a party can request the BTC/USD price as ‘json(https://api.gdax.com/products/BTC-USD/ticker).price’  or the Tellor system can build into its miner and community that the BTC/USD price corresponding to a given request ID is actually identified as something more robust such as a moving average of five different exchanges.  Since the validity of a data point is ultimately decided by a vote on the Tellor system, a request ID can correspond to any number of different hard coded or even manual inputs to prevent a data provider from censoring Tellor miners (i.e. shutting off their API feed).
 
 ## Potential Applications <a name="potential-applications"> </a>
 
@@ -702,6 +726,7 @@ As Tellor is a contract mechanism that allows oracle data to be derived in a com
 5. <b>Prediction Market Resolution:</b> i.e. determining who won the most recent presidential election or sporting event
 6. <b>Damage verification:</b> What were the net total results in damage for insurance contracts
 7. <b>Pseudorandom number generation:</b> to select a winner in a distributed-lottery smart contract, etc.
+
 
 ## Future
 
