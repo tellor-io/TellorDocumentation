@@ -5,7 +5,7 @@ This is the workhorse of the Miner system as it takes on solving the PoW challen
 It's built on Go and utilizes a split structure.  The database piece is a LevelDB that keeps track of all variables (challenges, difficulty, values to submit, etc.) and the miner simply solves the PoW challenge.  This enables parties to split the pieces for optimization.
 
 <p align="center">
-<img src="./img/minerspecs.png" width="450" alt="minerspecs">
+<img src="./img/minerspecs.png" width="450" height="400" alt="minerspecs">
 </p>
 
 

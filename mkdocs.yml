@@ -17,7 +17,7 @@ nav:
       - 'Miner Implementation-Non-Technical': 'MinerSetupNonTechnical.md'
       - 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
-- Data Sources Supported: 'DataSources.md'
+#- Data Sources Supported: 'DataSources.md'
 - Functions: 
     - 'Deploying Tellor': 'DevDocumentation.md'
     - 'User Functions' : 'UserFunctions.md'
