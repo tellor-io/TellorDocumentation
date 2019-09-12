@@ -543,9 +543,6 @@ The official value will still be the median value but all miners will receive eq
 
 Tellor Base Reward Mechanism  
 
-<p align="center">
-<img src="./public/RewardMechanism.PNG"   alt = "reward">
-</p>
 
 The data collection is decentralized since mining, and by extension data submission, is open to everyone who stakes.  Using the median value instead of the average protects the value from being manipulated by a single party submitting an extreme value. To ensure data availability, multiple parties are incentivized to submit data by rewarding the first five miners that submit the PoW and of-chain data point. 
 
@@ -562,14 +559,14 @@ Since the time target of the oracle is 10 minutes, there are only 144 queries pe
 ### 2. Structural incentives to promote accurate value submissions
 
 Miners are incentivized to provide accurate values through 3 processes:
-* [Mining rewards are given to first five miners and the median value becomes the official value](#uncles)
+* [Mining rewards are given to first five miners](#uncles)
 * [Every miner required to stake 1000 tokens](#staking)
 * [Every accepted value can be challenged and put to vote by all Tellor Tribute holders](distputes)
 
 The next three subsections provide further details and goals of these.
 
-#### Mining rewards are based upon submission of median value <a name="uncles"> </a>
-Uncle rewards can be used to reduce the chance of a miner gaining 51% of hashing power a smart contract pays miners to mine uncles. The Tellor Oracle utilizes uncles by rewarding  five miners per data value instead of just one. 
+#### Mining rewards are given to first five miners <a name="uncles"> </a>
+Uncle rewards can be used to reduce the chance of a miner gaining 51% of hashing power a smart contract pays miners to mine uncles. Mining rewards are given to first five miners and the median value becomes the official value. The Tellor Oracle utilizes uncles by rewarding  five miners per data value instead of just one. 
 
 #### Every miner required to stake 1000 tokens <a name="staking"> </a>
 Miners have to stake 1000 Tributes to be able to mine. Staking allows for economic penalties to miners submitting incorrect values. Parties pay to report a miner providing false data, which leads to the report going to a vote (all Tribute holders can vote, the duration of the vote dictates how long the “bad” miner is frozen from mining).  If found guilty, the malicious miner’s stake goes to the reporter; otherwise the fee paid by the reporter is given to the wrongly accused miner. 

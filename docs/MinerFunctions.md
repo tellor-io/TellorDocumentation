@@ -1,3 +1,22 @@
+
+# Tellor Miner
+
+This is the workhorse of the Miner system as it takes on solving the PoW challenge.  
+It's built on Go and utilizes a split structure.  The database piece is a LevelDB that keeps track of all variables (challenges, difficulty, values to submit, etc.) and the miner simply solves the PoW challenge.  This enables parties to split the pieces for optimization.
+
+<p align="center">
+    <img src= './img/minerspecs.png' width="450" alt='MinerSpecs' />
+</p>
+
+
+### Tellor Deployed Addresses
+
+Mainnet - [0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5](https://etherscan.io/address/0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5)
+
+Rinkeby - [0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e](https://rinkeby.etherscan.io/address/0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e)
+
+</br>
+
 ## Miner functions <a name="miner-fx"> </a>  
 Miners engage in a POW competition to find a nonce which satisfies the requirement of the challenge.  The first five miners who solve the PoW puzzle provide the nonce, requestId, and value and receive native tokens in exchange for their work.  The oracle data submissions are stored in contract memory as an array - which is subsequently operated upon to derive the median value.
 

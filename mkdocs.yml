@@ -14,8 +14,9 @@ nav:
       - 'User Contracts': 'UserSetup.md'
       - 'User Walkthrough': 'UserWalk.md'
 - Become a Miner: 
-      - 'Miner Implementation': 'MinerSetup.md'
-      - 'Miner Walkthrough': 'MinerWalk.md' 
+      - 'Miner Implementation-Non-Technical': 'MinerSetupNonTechnical.md'
+      - 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
+      - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
 - Data Sources Supported: 'DataSources.md'
 - Functions: 
     - 'Deploying Tellor': 'DevDocumentation.md'
