@@ -559,6 +559,7 @@ Since the time target of the oracle is 10 minutes, there are only 144 queries pe
 ### 2. Structural incentives to promote accurate value submissions
 
 Miners are incentivized to provide accurate values through 3 processes:
+
 * [Mining rewards are given to first five miners](#uncles)
 * [Every miner required to stake 1000 tokens](#staking)
 * [Every accepted value can be challenged and put to vote by all Tellor Tribute holders](distputes)
