@@ -5,7 +5,7 @@ This is the workhorse of the Miner system as it takes on solving the PoW challen
 It's built on Go and utilizes a split structure.  The database piece is a LevelDB that keeps track of all variables (challenges, difficulty, values to submit, etc.) and the miner simply solves the PoW challenge.  This enables parties to split the pieces for optimization.
 
 <p align="center">
-    <img src= './img/minerspecs.png' width="450" alt='minerspecs' >
+<img src="./img/minerspecs.png" width="450" alt="minerspecs">
 </p>
 
 
@@ -17,14 +17,6 @@ Rinkeby - [0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e](https://rinkeby.etherscan
 
 </br>
 
-
-### Tellor Deployed Addresses
-
-Mainnet - [0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5](https://etherscan.io/address/0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5)
-
-Rinkeby - [0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e](https://rinkeby.etherscan.io/address/0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e)
-
-</br>
 
 The following is documentation on launching the miner from a new AWS Linux box.  It was written for the non-technical audience
 
