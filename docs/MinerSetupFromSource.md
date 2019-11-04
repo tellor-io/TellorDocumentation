@@ -2,6 +2,10 @@
 These instructions are for installing and running TellorMiner from source on Linux and has been tested on Ubuntu 18.04.
 
 # Setup TellorMiner
+## Install Build Essentials
+```
+apt-get install build-essential
+```
 ## Install Go
 TellorMiner uses go so start by installing go:
 ```
@@ -80,7 +84,7 @@ go run ./main.go -dataServer -config=./config.json -psrPath=./psr.json -logConfi
 After starting the data server, observe the logs it outputs to confirm it's working correctly.
 
 ### Run the Miner
-Once the data server is running, setup the miner by running this command in another terminal:
+Once the data server is running, start the miner by running this command in another terminal or process:
 ```
 go run ./main.go -miner -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
 ```
