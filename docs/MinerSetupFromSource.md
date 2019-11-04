@@ -67,8 +67,9 @@ go run ./main.go -transfer -to=<0x...toaddress....> -amount=<number of tributes>
 To run TellorMiner you first need to change `config.json`. Do the following changes
 1. Set `privateKey` to the private key for the Ethereum wallet you plan to use
 2. Set `publicKey` to the public key for the Ethereum wallet you plan to use
-3. Set `numProcessors` to the number of processors your computer has
-4. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
+3. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
+4. Set `numProcessors` to the number of processors your computer has
+5. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
 
 ### Deposit your initial stake
 To deposit your stake initially (assuming you have 1000 Tributes) you can run the following command from inside `~/go/src/github.com/tellor-io/TellorMiner`
