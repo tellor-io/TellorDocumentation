@@ -1,5 +1,5 @@
 # Run TellorMiner from Source
-These instructions are for installing and running TellorMiner from source on Linux and has been tested on Ubuntu 18.04.
+These instructions are for installing and running TellorMiner from source on Linux. These have been tested on Ubuntu 18.04.
 
 # Setup TellorMiner
 ## Install Build Essentials
