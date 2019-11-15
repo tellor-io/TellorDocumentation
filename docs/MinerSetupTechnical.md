@@ -83,5 +83,5 @@ wget https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMin
 ```
 And get the latest PSR file:
 ```
-wget https://github.com/tellor-io/TellorMiner/blob/master/psr.json
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/psr.json
 ```
