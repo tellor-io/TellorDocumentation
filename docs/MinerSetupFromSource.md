@@ -1,12 +1,12 @@
 # Run TellorMiner from Source
 These instructions are for installing and running TellorMiner from source on Linux. These have been tested on Ubuntu 18.04.
 
-# Setup TellorMiner
-## Install Build Essentials
+## Setup TellorMiner
+### Install Build Essentials
 ```
 apt-get install build-essential
 ```
-## Install Go
+### Install Go
 TellorMiner uses go so start by installing go:
 ```
 wget https://dl.google.com/go/go1.13.1.linux-amd64.tar.gz
@@ -19,16 +19,16 @@ EOT
 source ~/.profile
 ```
 
-## Setup Go Project Directory Structure
-You will need to create the following directory structure in the location where you wish to install TellorMiner. 
+### Setup Go Project Directory Structure
+You will need to create the following directory structure in the location where you wish to install TellorMiner.
 ```
----./bin/ 
----./pkg/ 
----./src/ 
-   | 
-   ---./github.com/ 
-      | 
-      ---./tellor-io/ 
+---./bin/
+---./pkg/
+---./src/
+   |
+   ---./github.com/
+      |
+      ---./tellor-io/
 ```
 These instructions assume you're installing in your `$HOME` directory and will create this in `$HOME/go`:
 ```
@@ -39,14 +39,14 @@ mkdir pkg
 mkdir bin
 ```
 
-## Use Git to Download TellorMiner
+### Use Git to Download TellorMiner
 Navigate into `src/github.com/tellor-io/` and clone the TellorMiner:
 ```
 cd ~/go/src/github.com/tellor-io
 git clone https://github.com/tellor-io/TellorMiner
 ```
 
-## Get Go Dependancies for Tellor Miner
+### Get Go Dependancies for Tellor Miner
 Remaining in `src/github.com/tellor-io/`, use `go get` to download and install the dependancies you will need to run TellorMiner. This can take a while to run so be patient:
 ```
 go get -d ./TellorMiner
@@ -56,25 +56,26 @@ cd TellorMiner
 At this point, you will be able to run the miner use go if you `cd TellorMiner` and run commands from inside of the `TellorMiner` directory. A few example commands you can run:
 ```
 # Deposit Initial Stake
-go run ./main.go -deposit -config=./config.json -psrPath=./psr2.json -logConfig=./loggingConfig.json 
+go run ./main.go -deposit -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
 
 # Transfer Tributes
-go run ./main.go -transfer -to=<0x...toaddress....> -amount=<number of tributes> -config=./config.json -psrPath=./psr2.json -logConfig=./loggingConfig.json
+go run ./main.go -transfer -to=<0x...toaddress....> -amount=<number of tributes> -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
 ```
 
-# Start Mining
+## Start Mining
 ### Update `config.json`
 To run TellorMiner you first need to change `config.json`. Do the following changes
-1. Set `privateKey` to the private key for the Ethereum wallet you plan to use
-2. Set `publicKey` to the public key for the Ethereum wallet you plan to use
-3. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
-4. Set `numProcessors` to the number of processors your computer has
-5. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
+1. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
+2. Set `privateKey` to the private key for the Ethereum wallet you plan to use (note no "0x" prefix)
+3. Set `publicAddress` to the public key for the Ethereum wallet you plan to use (note no "0x" prefix)
+4. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
+5. Add `numProcessors` to the number of processors your computer has
+6. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
 
 ### Deposit your initial stake
 To deposit your stake initially (assuming you have 1000 Tributes) you can run the following command from inside `~/go/src/github.com/tellor-io/TellorMiner`
 ```
-go run ./main.go -deposit -config=./config.json -psrPath=./psr2.json -logConfig=./loggingConfig.json 
+go run ./main.go -deposit -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
 ```
 
 ### Run the Data Server
@@ -90,7 +91,3 @@ Once the data server is running, start the miner by running this command in anot
 go run ./main.go -miner -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
 ```
 After starting the miner, observe the logs it outputs to confirm it's working correctly.
-
-
-
-
