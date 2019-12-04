@@ -47,7 +47,7 @@ The getCurrentVariables solidity function returns all the necessary variables.
     }
 ```
 ## submitMiningSolution
-Miners can use the submitMiningSolution function to submit the PoW, requestId, and off-chain value. Production and test python miners are available under the miner subdirectory [here](./miner/).  The PoW challenge is different than the regular PoW challenge used in Bitcoin. 
+Miners can use the submitMiningSolution function to submit the PoW, requestId, and off-chain value. Production and test python miners are available under the miner subdirectory [here](https://github.com/tellor-io/TellorCore/tree/master/miner).  The PoW challenge is different than the regular PoW challenge used in Bitcoin. 
 
 ```javascript
 submitMiningSolution(string nonce, uint _requestId, uint value)

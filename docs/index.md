@@ -612,7 +612,7 @@ function submitMiningSolution(TellorStorageStruct storage self,string memory _no
 ```
 The difficulty adjustment is based on the percent difference between the time target and the time it took to solve the previous challenge. For example, if the time target is 10 minutes and the PoW challenge is submitted in 6 minutes, the difficulty will increase by the 40 percent on the next challenge.
 
-An implementation of the miner is described in python in the 'miner' sub directory.  In 'miner.py', the script imports the web3 library, pandas, and various other dependencies to solve the keccak256, sha256, and ripemd160 puzzle.  In submitter.js, the nonce value inputs are submitted to the smart contract on-chain.  To examine the mining script, navigate [here](./miner/).
+An implementation of the miner is described in python in the 'miner' sub directory.  In 'miner.py', the script imports the web3 library, pandas, and various other dependencies to solve the keccak256, sha256, and ripemd160 puzzle.  In submitter.js, the nonce value inputs are submitted to the smart contract on-chain.  To examine the mining script, navigate [here](https://github.com/tellor-io/TellorCore/tree/master/miner).
 
 ### Submission 
 Miners submitting values must submit the following in order to be a valid submission via the <b>proofOfWork</b> function:

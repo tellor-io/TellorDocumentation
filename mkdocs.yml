@@ -18,6 +18,7 @@ nav:
       - 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
 #- Data Sources Supported: 'DataSources.md'
+- Creating API for Tellor data: "TellorApi.md"
 - Functions: 
     - 'Deploying Tellor': 'DevDocumentation.md'
     - 'User Functions' : 'UserFunctions.md'
