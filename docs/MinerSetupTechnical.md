@@ -18,6 +18,12 @@ Now, edit the `config.json`, be sure to update these values:
 4. Set `serverWhitelist` so that it includes your `publicAddress` (this whitelists your miner to use your local dataServer)
 5. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
 
+### Utilizing your GPU
+To utilize your GPU, you need to add the following line to your `config.json` file:
+ 
+         "useGPU":true,
+
+
 ## Download the PSR File
 The `psr.json` file contains information about the different request and associated URLs. Download the latest version:
 ```

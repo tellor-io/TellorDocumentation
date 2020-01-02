@@ -61,6 +61,7 @@ config.json
     "ethClientTimeout": 3000,
     "trackerCycle": 10,
     "requestData":0,
+    "useGPU":false,
  "trackers": [
         "balance",
         "currentVariables",
@@ -208,6 +209,14 @@ Ctrl + x
 pm2 start ./ecosystem.config.js
 
 ```
+
+
+### Utilizing your GPU
+To utilize your GPU, you change the useGPU line in your `config.json` file to true:
+ 
+         "useGPU":true,
+
+
 
 ## How to update the miner <a name="update"> </a>  
 

@@ -72,6 +72,12 @@ To run TellorMiner you first need to change `config.json`. Do the following chan
 5. Add `numProcessors` to the number of processors your computer has
 6. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
 
+### Utilizing your GPU
+To utilize your GPU, you need to add the following line to your `config.json` file:
+ 
+         "useGPU":true,
+
+
 ### Deposit your initial stake
 To deposit your stake initially (assuming you have 1000 Tributes) you can run the following command from inside `~/go/src/github.com/tellor-io/TellorMiner`
 ```
