@@ -81,6 +81,7 @@ Here is some information about the TellorMiner for reference.
 * gasMax - a max for the gas price in gwei (note: this max comes BEFORE the gas multiplier.  So a max gas cost of 10 gwei, can have gas prices up to 20 if gasMultiplier is 2)
 * heartbeat - an integer that controls how frequently the miner process should report the hashrate (larger is less frequent, try 1000000 to start)
 * numProcessors - an integer number of processors to use for mining
+* useGPU - a boolean as to whether to use the GPU on your machine.  Will use the CPU if false
 ```
 ## Updating TellorMiner
 To update TellorMiner, just download the latest binary release
