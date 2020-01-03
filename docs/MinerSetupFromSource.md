@@ -51,7 +51,16 @@ Remaining in `src/github.com/tellor-io/`, use `go get` to download and install t
 ```
 go get -d ./TellorMiner
 cd TellorMiner
-# ready to go run
+```
+
+Now you need to generate the opencl files for your build by creating a 'kernelSource.go' file in your pow folder.  To do this:
+
+```
+cd pow
+go generate #should create a kernelSource.go file
+cd ..
+
+# ready to 'go run'  or 'go build'
 ```
 At this point, you will be able to run the miner use go if you `cd TellorMiner` and run commands from inside of the `TellorMiner` directory. A few example commands you can run:
 ```

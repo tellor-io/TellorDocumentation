@@ -13,7 +13,7 @@ It's built on Go and utilizes a split structure.  The database piece is a LevelD
 
 Mainnet - [0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5](https://etherscan.io/address/0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5)
 
-Rinkeby - [0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e](https://rinkeby.etherscan.io/address/0x3f1571e4dfc9f3a016d90e0c9824c56fd8107a3e)
+Rinkeby - [0x724D1B69a7Ba352F11D73fDBdEB7fF869cB22E19](https://rinkeby.etherscan.io/address/0x724D1B69a7Ba352F11D73fDBdEB7fF869cB22E19)
 
 </br>
 
