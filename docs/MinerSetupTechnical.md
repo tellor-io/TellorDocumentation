@@ -83,6 +83,29 @@ Here is some information about the TellorMiner for reference.
 * numProcessors - an integer number of processors to use for mining
 * useGPU - a boolean as to whether to use the GPU on your machine.  Will use the CPU if false
 ```
+
+### LogConfig file options:
+The logging.config file consists of two fields:
+* component
+* level
+
+
+The component is the package.component combination.  
+E.G. the Runner component in the tracker package would be:
+tracker.Runner
+
+To turn on logging, add the component and the according level.  Note the default level is "INFO", so to turn down the number of logs, enter "WARN" or "ERROR"
+
+```
+DEBUG - logs everything in INFO and additional developer logs
+INFO - logs most information about the mining operation
+WARN - logs all warnings and errors
+ERROR - logs only serious errors
+```
+
+
+
+
 ## Updating TellorMiner
 To update TellorMiner, just download the latest binary release
 ```
