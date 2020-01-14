@@ -57,11 +57,17 @@ config.json
     "databaseURL":"http://localhost7545",
     "publicAddress": "e037ec8ec9ec4238bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
     "serverHost": "localhost",
-    "serverPort": 5000,
+    "serverPort": 5001,
     "ethClientTimeout": 3000,
-    "trackerCycle": 10,
-    "requestData":0,
-    "useGPU":false,
+    "trackerCycle": 22,
+    "requestData":12,
+    "gpuConfig":{
+        "foo":{
+                "groupSize":64,
+                "groups":128,
+                "count":256
+        }
+    },
  "trackers": [
         "balance",
         "currentVariables",
@@ -74,7 +80,11 @@ config.json
     ],
     "dbFile": "/tmp/tellor/tellor_db"
 }
+
+
 ```
+** Note that if you do not want to use the GPU miner, simply delete the "gpuConfig" variable
+
 
 * Copy and paste the code into the terminal and use the hot keys below to save config.json and the nano command to create loggingConfig.json:
 
@@ -125,124 +135,34 @@ nano loggingConfig.json
 * Use the hot keys below to save loggingConfig.json and create psr.json:
 
 ```bash
-Ctrl + o
-Enter
-Ctrl + x
-
-nano psr.json
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/psr.json 
 
 ```
 
-* Copy and paste the code below on the terminal to psr.json:
-
-```json
-{
-    "prespecifiedRequests":[
-        {
-            "requestID":1,
-            "apis":[
-                "json(https://api.gdax.com/products/ETH-USD/ticker).price"
-            ],
-            "transformation" : "value",
-            "granularity" : 1000
-        }
-    ]
-}
-```
-
-* Use the hot keys below to save psr.json:
+* Run the following commands from the terminal to stake your 1000 TRB:
 
 ```bash
-Ctrl + o
-Enter
-Ctrl + x
-```
-
-* Run the following commands from the terminal:
-
-```bash
-sudo apt install nodejs 
-
-sudo apt install npm 
-
-sudo npm i -g pm2
 
 ./TellorMiner -deposit -psrPath=./psr.json -config=./config.json -logConfig=./loggingConfig.json
 
-nano ecosystem.config.js
 
 ```
-
-* Copy and paste the code below on the terminal to ecosystem.config.js:
-
-Note: be sure to check that the path to the runMiner.sh file is correct (e.g. are you home/ubuntu)
-
-```javascript
-module.exports = { apps : [ { name: "tellor-miner1", script: "/home/ubuntu/runMiner.sh", exec_mode: "fork", exec_interpreter: "bash"} ] }
-```
-
-* Use the hot keys below to save the ecosystem.config.js and create runMiner.sh:
+* Run the following commands from the terminal to start the miner:
 
 ```bash
-Ctrl + o
-Enter
-Ctrl + x
 
-nano runMiner.sh
+./TellorMiner -miner -dataServer -psrPath=./psr.json -config=./config.json -logConfig=./loggingConfig.json
+
 
 ```
-
-runMiner.sh
-
-```bash
-#!/bin/sh
-$HOME/TellorMiner -config=$HOME/config.json -miner -dataServer -psrPath=$HOME/psr.json
-```
-
-* Use the hot keys below to save the ecosystem.config.js and create ecosystem.config.js:
-
-```bash
-Ctrl + o
-Enter
-Ctrl + x
-
-pm2 start ./ecosystem.config.js
-
-```
-
-
-### Utilizing your GPU
-To utilize your GPU, you change the useGPU line in your `config.json` file to true:
- 
-         "useGPU":true,
-
-
-
 ## How to update the miner <a name="update"> </a>  
 
 * Open a terminal
 
-* Stop the process by running:
+* Stop the process and delete the Miner:
 
 ```bash
-pm2 stop all
-
-```
-
-* To update PSR run:
-
-```bash
-nano PSR.json
-
-```
-[paste the new PSR file]
-
-* Use the hot keys below to save psr.json:
-
-```bash
-Ctrl + o
-Enter
-Ctrl + x
+rm TellorMiner
 ```
 
 * To update Tellor miner run:
@@ -252,13 +172,8 @@ wget https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMin
 ```
 
 
-* Once you have made the updates either to the psr.json or the miner run:
+* Once you have made the updates either to the psr.json or the miner, simply restart the miner
 
-
-```bash
-pm2 restart all
-
-```
 
 ### DISCLAIMER
 

@@ -84,7 +84,13 @@ To run TellorMiner you first need to change `config.json`. Do the following chan
 ### Utilizing your GPU
 To utilize your GPU, you need to add the following line to your `config.json` file:
  
-         "useGPU":true,
+    "gpuConfig":{
+        "foo":{
+                "groupSize":64,
+                "groups":128,
+                "count":256
+        }
+    },
 
 
 ### Deposit your initial stake

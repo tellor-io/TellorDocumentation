@@ -21,7 +21,19 @@ Now, edit the `config.json`, be sure to update these values:
 ### Utilizing your GPU
 To utilize your GPU, you need to add the following line to your `config.json` file:
  
-         "useGPU":true,
+    "gpuConfig":{
+        "foo":{
+                "groupSize":64,
+                "groups":128,
+                "count":256
+        }
+    },
+
+If you wish to tweak the variables for performance, do so at your own risk:
+
+			groupSize - number of groups to split work into
+			groups - number of groups of work submitted to the gpu at once. needs to be large enough to fully load the gpu. different numbers here can produce drastically different hash rates
+			count: number of hashes each thread executes in one pass
 
 
 ## Download the PSR File
@@ -85,6 +97,7 @@ Here is some information about the TellorMiner for reference.
 ```
 
 ### LogConfig file options:
+
 The logging.config file consists of two fields:
 * component
 * level
