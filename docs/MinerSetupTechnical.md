@@ -147,6 +147,19 @@ and multiple miners that all read off of the one database
 For instructions:
 https://docs.google.com/document/d/1k8ELb1cXkEpztHkHUt8QTL4JCcnHw5_yQjTKIHCaSCE
 
+## Connecting to a pool
+
+Add the following to your config file: 
+
+    "enablePoolWorker": true,
+    "poolURL": "<poolURL>",
+
+Where the <poolURL> is the link to your pool. Current tellor pools:
+
+        http://tellorpool.org
+
+
+
 ## Updating TellorMiner
 To update TellorMiner, just download the latest binary release
 ```
