@@ -21,13 +21,29 @@ Now, edit the `config.json`, be sure to update these values:
 ### Utilizing your GPU
 To utilize your GPU, you need to add the following line to your `config.json` file:
  
-    "gpuConfig":{
-        "foo":{
-                "groupSize":64,
-                "groups":128,
-                "count":256
+        "gpuConfig":{
+            "default":{
+                "groupSize":256,
+                "groups":4096,
+                "count":16
+            }
         }
-    },
+
+If you would like to specify different config settings for each GPU card, you can use the GPU's name in the following format:
+
+        "gpuConfig":{
+            "<GPUName1>":{
+                "groupSize":256,
+                "groups":4096,
+                "count":16
+            },
+            "<GPUName2>":{
+                "groupSize":256,
+                "groups":4096,
+                "count":16
+            }
+        }
+
 
 If you wish to tweak the variables for performance, do so at your own risk:
 
@@ -116,8 +132,20 @@ WARN - logs all warnings and errors
 ERROR - logs only serious errors
 ```
 
+### Running a remote data server
 
+If you are running multiple miners, there is no reason to run multiple databases (the values you will submit should be identical).  In addition, querying the same API from multiple processes can lead to rate limits on the public API's.  To get around this, you can utilize a system where you run one:
 
+    TellorMiner -dataServer
+
+and multiple miners that all read off of the one database
+
+        TellorMiner -miner -config=./config1
+        TellorMiner -miner -config=./config2 
+        etc..
+
+For instructions:
+https://docs.google.com/document/d/1k8ELb1cXkEpztHkHUt8QTL4JCcnHw5_yQjTKIHCaSCE
 
 ## Updating TellorMiner
 To update TellorMiner, just download the latest binary release

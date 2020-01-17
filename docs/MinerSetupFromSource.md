@@ -80,17 +80,7 @@ To run TellorMiner you first need to change `config.json`. Do the following chan
 4. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
 5. Add `numProcessors` to the number of processors your computer has
 6. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
-
-### Utilizing your GPU
-To utilize your GPU, you need to add the following line to your `config.json` file:
- 
-    "gpuConfig":{
-        "foo":{
-                "groupSize":64,
-                "groups":128,
-                "count":256
-        }
-    },
+7. Change your `gpuConfig` settings if you plan on using a GPU
 
 
 ### Deposit your initial stake
