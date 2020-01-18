@@ -1,5 +1,5 @@
 # Run TellorMiner and Join the Pool
-These instructions are for running the official TellorMiner **without staking 1000 TRB**. Use these instructions to participate in pool mining.
+These instructions are for running the official TellorMiner as part of a Tellor pool and without staking 1000 TRB. 
 
 ## Download the TellorMiner
 First, visit GitHub and download the latest release of [TellorMiner](https://github.com/tellor-io/TellorMiner/releases).
