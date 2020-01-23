@@ -16,6 +16,8 @@ nav:
 - Become a Miner: 
       - 'Miner Setup': 'MinerSetup.md'
       #- 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
+      - 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
+
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
 #- Data Sources Supported: 'DataSources.md'
 - Creating API for Tellor data: "TellorApi.md"
