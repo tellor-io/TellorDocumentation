@@ -8,18 +8,20 @@ theme:
         - javascript
         - solidity
 nav:
-- Tellor: 
+- Tellor:
     - 'What is Tellor?' : 'index.md'
 - Integrate Tellor into  your Smart Contracts:
       - 'User Contracts': 'UserSetup.md'
       - 'User Walkthrough': 'UserWalk.md'
+
 - Become a Miner: 
       - 'Miner Setup': 'MinerSetup.md'
       #- 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
+      - 'Miner Implementation-Pool Mining':  'MinerSetupPool.md'
 #- Data Sources Supported: 'DataSources.md'
 - Creating API for Tellor data: "TellorApi.md"
-- Functions: 
+- Functions:
     - 'Deploying Tellor': 'DevDocumentation.md'
     - 'User Functions' : 'UserFunctions.md'
     - 'Miner Functions' : 'MinerFunctions.md'
