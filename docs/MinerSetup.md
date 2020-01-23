@@ -1,10 +1,21 @@
 # Run TellorMiner from Latest Binary Release
-These instructions are for installing and running TellorMiner from source on Linux. These have been tested on Ubuntu 18.04.
+
+This is the workhorse of the Miner system as it takes on solving the PoW challenge.  
+
+It's built on Go and utilizes a split structure.  The database piece is a LevelDB that keeps track of all variables (challenges, difficulty, values to submit, etc.) and the miner simply solves the PoW challenge.  This enables parties to split the pieces for optimization.
 
 ## Download the Latest Binary Release
+
+#### Linux
 ```
 wget https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner
 ```
+#### Windows
+
+Download executable file: 
+
+[https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner.exe](https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner.exe)
+
 
 ## Update the Miner Configuration File
 Start by downloading the sample configuration file:
@@ -19,7 +30,7 @@ Now, edit the `config.json`, be sure to update these values:
 5. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
 
 ### Utilizing your GPU
-To utilize your GPU, you need to add the following line to your `config.json` file:
+Your GPU is enabled by default, but to edit any of the specifics of the configuration, edit the following line in your `config.json` file:
  
         "gpuConfig":{
             "default":{
@@ -41,7 +52,14 @@ If you would like to specify different config settings for each GPU card, you ca
                 "groupSize":256,
                 "groups":4096,
                 "count":16
-            }
+            }, 
+            "<GPUName3>":{
+                "groupSize":256,
+                "groups":4096,
+                "count":16,
+                "disabled":true
+            }, 
+            
         }
 
 
@@ -50,14 +68,20 @@ If you wish to tweak the variables for performance, do so at your own risk:
 			groupSize - number of groups to split work into
 			groups - number of groups of work submitted to the gpu at once. needs to be large enough to fully load the gpu. different numbers here can produce drastically different hash rates
 			count: number of hashes each thread executes in one pass
+            disabled: boolean on whether or not to disable a specific GPU
 
 
-## Download the PSR File
+## Download the PSR and Logging Config Files
 The `psr.json` file contains information about the different request and associated URLs. Download the latest version:
 ```
 wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/psr.json
-```
 
+```
+The `loggingConfig.json` file contains information about the levels of logging in your terminal. Download the latest version:
+```
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/loggingConfig.json
+
+```
 ## Start Mining
 Tellor is a staked miner. You will need 1000 TRB to mine. Additionally, TellorMiner requires that you run a dataServer process and a miner process. The instructions below can be used to get started.
 
@@ -87,6 +111,8 @@ Here is some information about the TellorMiner for reference.
 * **-transfer -toAddress -amount** (do not run these with miner/dataServer)(indicates transfer, toAddress is Ethereum address and amount is number of Tributes (note 18 decimals))
 * **-deposit** (do not run these with miner/dataServer)(indicates to deposit 1000 tokens in the contract (note you must have 1000 Tributes in your account))
 * **-logConfig** (path to loggingConfig file if you want to save log output)
+* **-requestStakingWithdraw** (indicates you wish to withdraw your stake)
+* **-withdraw** (withdraws your stake, run 1 week after request)
 
 
 ### Config file options:
@@ -158,16 +184,23 @@ Where the <poolURL> is the link to your pool. Current tellor pools:
 
         http://tellorpool.org
 
+Further options:
+
+    "poolJobDuration":10 
+
+The job duration is the time in seconds to grab information from the pool.  The default time is 15 seconds. 
 
 
-## Updating TellorMiner
-To update TellorMiner, just download the latest binary release
+## Ending Mining Operations / Unstaking
+
+To unstake your tokens, you need to request a withdraw: 
 ```
-wget https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner
+./TellorMiner requestStakingWithdraw -config=./config.json -psrPath=./psr.json
 ```
-And get the latest PSR file:
+One week after the request, the tokens are free to move at your discretion after running the command:
+
 ```
-wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/psr.json
+./TellorMiner -withdraw -config=./config.json -psrPath=./psr.json
 ```
 
 ### DISCLAIMER

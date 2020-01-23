@@ -13,9 +13,10 @@ nav:
 - Integrate Tellor into  your Smart Contracts:
       - 'User Contracts': 'UserSetup.md'
       - 'User Walkthrough': 'UserWalk.md'
-- Become a Miner:
-      - 'Miner Implementation-Non-Technical': 'MinerSetupNonTechnical.md'
-      - 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
+
+- Become a Miner: 
+      - 'Miner Setup': 'MinerSetup.md'
+      #- 'Miner Implementation-Technical':  'MinerSetupTechnical.md'
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
       - 'Miner Implementation-Pool Mining':  'MinerSetupPool.md'
 #- Data Sources Supported: 'DataSources.md'
