@@ -88,13 +88,13 @@ Tellor is a staked miner. You will need 1000 TRB to mine. Additionally, TellorMi
 ### Deposit your initial stake
 To deposit your stake you can run the following command:
 ```
-./TellorMiner -deposit -config=./config.json -psrPath=./psr.json
+./TellorMiner --config=./config.json stake deposit
 ```
 
 ### Run the Miner
 Start the miner by running this command in another terminal or process:
 ```
-./TellorMiner -miner -dataServer -config=./config.json -psrPath=./psr.json
+./TellorMiner --config=./config.json mine
 ```
 After starting the miner, observe the logs it outputs to confirm it's working correctly.
 
@@ -102,17 +102,20 @@ After starting the miner, observe the logs it outputs to confirm it's working co
 Here is some information about the TellorMiner for reference.
 
 ### Required Flags
-* **-psrPath** (path to your PSR file)
-* **-config** (path to your config file)
+* **--config** (path to your config file)
+* **--logConfig** (path to your loggingConfig file)
 
-### Optional Flags
-* **-miner** (indicates to run the miner)
-* **-dataServer** (indicates to run the dataServer)
-* **-transfer -toAddress -amount** (do not run these with miner/dataServer)(indicates transfer, toAddress is Ethereum address and amount is number of Tributes (note 18 decimals))
-* **-deposit** (do not run these with miner/dataServer)(indicates to deposit 1000 tokens in the contract (note you must have 1000 Tributes in your account))
-* **-logConfig** (path to loggingConfig file if you want to save log output)
-* **-requestStakingWithdraw** (indicates you wish to withdraw your stake)
-* **-withdraw** (withdraws your stake, run 1 week after request)
+### Commands
+* **mine** (indicates to run the miner)
+* **mine -r** (indicates to mine utilizing a remote server)
+* **dataserver** (indicates to run the dataServer (no mining))
+* **transfer (AMOUNT) (TOADDRESS)**  (indicates transfer, toAddress is Ethereum address and amount is number of Tributes (eg. transfer 10 0xea... (this transfers 10 tokens)))
+* **approve (AMOUNT) (TOADDRESS)** (ammount to approve the toaddress to send this amount of tokens
+* **stake deposit** (indicates to deposit 1000 tokens in the contract (note you must have 1000 Tributes in your account))
+* **stake request** (indicates you wish to withdraw your stake)
+* **stake withdraw** (withdraws your stake, run 1 week after request)
+* **stake status** (shows your staking balance)
+* **balance** (shows your balance)
 
 
 ### Config file options:
@@ -123,7 +126,7 @@ Here is some information about the TellorMiner for reference.
 * databaseURL (required) - where you are reading from for the server database (if hosted)
 * publicAddress (required) - public address for your miner (note, no 0x)
 * ethClientTimeout (required) - timeout for making requests from your node
-* trackerSleepCycle (required) - how often your database updates
+* trackerCycle (required) - how often your database updates (in seconds)
 * trackers (required) - which pieces of the database you update
 * dbFile (required) - where you want to store your local database (if self-hosting)
 * serverHost (required) - location to host server
@@ -131,11 +134,23 @@ Here is some information about the TellorMiner for reference.
 * serverWhitelist (required) - whitelists which publicAddress can access the data server
 * fetchTimeout - timeout for requesting data from an API
 * requestData - Will your miner request Data if challenge is 0.  If yes, then you will addTip() to this number.  Enter a uint number representing request id to be requested (e.g. 2)
+* requestDataInterval - min frequency at which to request data at (in seconds, default 30)
 * gasMultiplier - Multiplies the submitted gasPrice (e.g. 2 (will double gas costs))
 * gasMax - a max for the gas price in gwei (note: this max comes BEFORE the gas multiplier.  So a max gas cost of 10 gwei, can have gas prices up to 20 if gasMultiplier is 2)
 * heartbeat - an integer that controls how frequently the miner process should report the hashrate (larger is less frequent, try 1000000 to start)
 * numProcessors - an integer number of processors to use for mining
-* useGPU - a boolean as to whether to use the GPU on your machine.  Will use the CPU if false
+* gpuConfig:{
+        "foo":{
+                "groupSize":64,
+                "groups":128,
+                "count":256,
+                "disabled":false
+        }
+    }  -  GPU config options
+* disputeTimeDelta - how far back to store values for min/max range - default 5 (in minutes)
+* disputeThreshold - percentage of acceptable range outside min/max for dispute checking - default 0.01 (1%)
+* psrFolder - folder location holding your psr.json file, default working directory
+
 ```
 
 ### LogConfig file options:
@@ -162,16 +177,31 @@ ERROR - logs only serious errors
 
 If you are running multiple miners, there is no reason to run multiple databases (the values you will submit should be identical).  In addition, querying the same API from multiple processes can lead to rate limits on the public API's.  To get around this, you can utilize a system where you run one:
 
-    TellorMiner -dataServer
+    TellorMiner dataServer
 
 and multiple miners that all read off of the one database
 
-        TellorMiner -miner -config=./config1
-        TellorMiner -miner -config=./config2 
+        TellorMiner mine -r
+        TellorMiner mine -r
         etc..
 
-For instructions:
-https://docs.google.com/document/d/1k8ELb1cXkEpztHkHUt8QTL4JCcnHw5_yQjTKIHCaSCE
+To do this you need to edit your config file for the dataServer to add the public addresses of all remote miners that want to read the database:
+
+            “serverWhitelist”: [
+                    "0x1...",
+                    "0x2...."
+            ]
+
+And then in both your miner and dataServer config files, you must change the IP addresses to match (the server/port you are hosting/reading from)
+
+        "serverHost": "1.2.3.4",
+        "serverPort": 5000,
+
+Note that your dataServer and miners must be separate commands
+
+
+For more detailed instructions:
+[https://docs.google.com/document/d/1k8ELb1cXkEpztHkHUt8QTL4JCcnHw5_yQjTKIHCaSCE](https://docs.google.com/document/d/1k8ELb1cXkEpztHkHUt8QTL4JCcnHw5_yQjTKIHCaSCE)
 
 ## Connecting to a pool
 
@@ -195,13 +225,37 @@ The job duration is the time in seconds to grab information from the pool.  The 
 
 To unstake your tokens, you need to request a withdraw: 
 ```
-./TellorMiner requestStakingWithdraw -config=./config.json -psrPath=./psr.json
+./TellorMiner --config=./config.json stake request
 ```
 One week after the request, the tokens are free to move at your discretion after running the command:
 
 ```
-./TellorMiner -withdraw -config=./config.json -psrPath=./psr.json
+./TellorMiner --config=./config.json stake withdraw
 ```
+
+## Running the Disputer
+
+Tellor as a system only functions properly if parties actively monitor the tellor network and dispute bad values.  Expecting parties to manually look at every value submitted is obviously burdensome.  The Tellor disputer automates this fact checking of values.  
+
+The way that it work is that your dataServer will store historical values (e.g. the last 10 minutes) and then compare any submitted values to the min/max of the historical values.  If the value submitted is outside a certain threshold (e.g. 10% of the min/max), then the party will be notified and they can choose if they wish to dispute the bad value.  
+
+To start the disputer, add the following line to your config file IN THE TRACKERS ARRAY:
+
+    "disputeChecker"
+
+Now when running the dataServer, you will store historical values and check for whether the submitted values were within min/max of the range of historical values given a threshold (e.g. 1% outside).  The variables for configuring the time range of the historical values and the threshold are as follows:
+
+
+        disputeTimeDelta: 5,
+        disputeThreshold: 0.01,
+
+Where 5 and .01 are the defaults, the variables are the amount of time in minutes to store historical values for comparison and the the threshold outside the min/max of the values (e.g. 0.01 = 1%);
+
+
+If the disputer is succesful and finds a submitted outside of your acceptable range, a text file containing pertinent information will be created in your working directory (the one you're running the miner out of) in the format: 
+
+        "possible-dispute-(blocktime).txt"
+
 
 ### DISCLAIMER
 

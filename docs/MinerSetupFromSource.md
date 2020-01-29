@@ -62,46 +62,7 @@ cd ..
 
 # ready to 'go run'  or 'go build'
 ```
-At this point, you will be able to run the miner use go if you `cd TellorMiner` and run commands from inside of the `TellorMiner` directory. A few example commands you can run:
-```
-# Deposit Initial Stake
-go run ./main.go -deposit -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
-
-# Transfer Tributes
-go run ./main.go -transfer -to=<0x...toaddress....> -amount=<number of tributes> -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
-```
-
-## Start Mining
-### Update `config.json`
-To run TellorMiner you first need to change `config.json`. Do the following changes
-1. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
-2. Set `privateKey` to the private key for the Ethereum wallet you plan to use (note no "0x" prefix)
-3. Set `publicAddress` to the public key for the Ethereum wallet you plan to use (note no "0x" prefix)
-4. Set `serverWhitelist` so that it includes your public key (this whitelists your miner to use your local dataserver)
-5. Add `numProcessors` to the number of processors your computer has
-6. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
-7. Change your `gpuConfig` settings if you plan on using a GPU
-
-
-### Deposit your initial stake
-To deposit your stake initially (assuming you have 1000 Tributes) you can run the following command from inside `~/go/src/github.com/tellor-io/TellorMiner`
-```
-go run ./main.go -deposit -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
-```
-
-### Run the Data Server
-The data server will fetch data from the internet and check the blockchain for miners. You need to run at least 1 data server. It is possible to run the data server and a miner on the same computer. You will start the data server using the following command:
-```
-go run ./main.go -dataServer -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
-```
-After starting the data server, observe the logs it outputs to confirm it's working correctly.
-
-### Run the Miner
-Once the data server is running, start the miner by running this command in another terminal or process:
-```
-go run ./main.go -miner -config=./config.json -psrPath=./psr.json -logConfig=./loggingConfig.json
-```
-After starting the miner, observe the logs it outputs to confirm it's working correctly.
+At this point, you will be able to run the miner use go if you `cd TellorMiner` and run commands from inside of the `TellorMiner` directory.
 
 ### DISCLAIMER
 
