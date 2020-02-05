@@ -54,9 +54,6 @@ If you would like to specify different config settings for each GPU card, you ca
                 "count":16
             }, 
             "<GPUName3>":{
-                "groupSize":256,
-                "groups":4096,
-                "count":16,
                 "disabled":true
             }, 
             
