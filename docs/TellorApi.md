@@ -50,7 +50,6 @@ Use the following hashes to read data from Tellor's contract.
 | disputeUintVars | numberOfVotes      | 0xa0bc13ce85a2091e950a370bced0825e58ab3a3ffeb709ed50d5562cbd82faab |
 | disputeUintVars | blockNumber        | 0x6f8f54d1af9b6cb8a219d88672c797f9f3ee97ce5d9369aa897fd0deb5e2dffa |
 | disputeUintVars | minerSlot          | 0x8ef61a1efbc527d6428ff88c95fdff5c6e644b979bfe67e03cbf88c8162c5fac |
-| disputeUintVars | quorum             | 0x30e85ae205656781c1a951cba9f9f53f884833c049d377a2a7046eb5e6d14b26 |
 | disputeUintVars | fee                | 0x833b9f6abf0b529613680afe2a00fa663cc95cbdc47d726d85a044462eabbf02 |
 | uintVars        | decimals           | 0x784c4fb1ab068f6039d5780c68dd0fa2f8742cceb3426d19667778ca7f3518a9 |
 | uintVars        | disputeFee         | 0x8b75eb45d88e80f0e4ec77d23936268694c0e7ac2e0c9085c5c6bdfcfbc49239 |

@@ -13,7 +13,7 @@ To quickly install Tellor for testing into your project run the following comman
 
 * <b>UserContract.sol</b> - Will exhange ether for Tributes for the data requests or tips submitted with Ether and submit the transaction to Tellor (since request data and tipping transactions for Tellor are required to be in Tributes). The price for Tributes is set by the UserContract.sol owner, a centralized source. In general, because the user will have the option to buy Tributes from other sources, the Tributes price in this contract should not greatly exceed the current market price.
 
-UserContract address on Rinkeby: [0x19e77D1B96978713fca53d946d4392f4b8F3c5AD](https://rinkeby.etherscan.io/address/0x19e77d1b96978713fca53d946d4392f4b8f3c5ad)
+UserContract address on Rinkeby: [0x0D17ED8DDE4AF196ff638F3704e94A77419Df2b8](https://rinkeby.etherscan.io/address/0x0D17ED8DDE4AF196ff638F3704e94A77419Df2b8)
 
 UserContract address on Mainnet: [0xCaC3937932621F62D94aCdE77bBB2a091FD26f58](https://etherscan.io/address/0xcac3937932621f62d94acde77bbb2a091fd26f58)
 
