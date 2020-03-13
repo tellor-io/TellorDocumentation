@@ -22,7 +22,7 @@ Change the following configuration options:
 "poolURL": "POOL_URL"
 ```
 Where the `POOL_URL` is the link to your pool. Current Tellor mining pools:
-* http://tellorpool.org
+* Coming soon
 
 5. If you're using GPU, add the following:
 ```
