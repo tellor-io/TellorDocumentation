@@ -1,5 +1,145 @@
 # Tellor REST API
-The [Tellor REST API](https://github.com/tellor-io/tellorREST)repository  allows you to create a local API for Tellor information. 
+The [Tellor REST API](https://github.com/tellor-io/tellorREST) repository allows you to create a local API for Tellor information. You can also access Tellor API using the endpoint at [api.tellorscan.com](http://api.tellorscan.com/info)
+
+# REST API Documentation
+This section documents the REST API endpoints.
+
+## GET /info
+Get general statistics about the Tellor network.
+### Request
+* None
+### Response
+* **stakerCount:** The number of accounts staking 1000 TRB
+* **difficulty:** The current network difficulty
+* **currentRequestId:** The current request ID, referencing PSR
+* **disputeCount:** The number of disputes that have occured all time		
+* **total_supply:** The amount of TRB tokens that have been issued by the Tellor network
+* **timeOfLastNewValue:** The unix epoch time that the last new value was added to the Tellor data feed
+* **requestCount:** Total number of requests through the system
+#### Example
+```
+{
+  "stakerCount": "47",
+  "difficulty": "1246804904077941",
+  "currentRequestId": "2",
+  "disputeCount": "19",
+  "total_supply": "1145832115753024439922925",
+  "timeOfLastNewValue": "1586008020",
+  "requestCount": "51"
+}
+```
+
+## GET /requestq
+Get the request queue.
+### Request
+* None
+### Response
+* **requestq:** Integer array of the top 50 requests by payment amount
+#### Example
+```
+{
+  "requestq": [0, 0, ..., 0]
+}
+```
+
+## GET /price/:requestID
+Get the price of a specific PSR.
+### Request
+* **requestID:** The API value to request, references a PSR
+#### Example
+```
+curl http://api.tellorscan.com/price/1
+```
+### Response
+* **didGet:** True if the requestID has a price, false otherwise
+* **value:** The value for the price, multiplied by some granularity (e.g. 1000)
+* **timestampRetrieved:** The unix epoch time the value was last updated
+#### Example
+```
+{
+  "didGet": true,
+  "value": "136880",
+  "timestampRetrieved": "1585835760"
+}
+```
+
+## GET /requestinfo/:requestID
+Get general information about a PSR.
+### Request
+* **requestID:** The API value to request, references a PSR
+#### Example
+```
+curl http://api.tellorscan.com/requestinfo/1
+```
+### Response
+* **apiString:** The query string for this request
+* **dataSymbol:** Short name for API request
+* **queryHash:** Hash of api string and granularity
+* **granularity:** The amount of decimals desired on the requested value
+* **requestQPosition:** Index in request queue
+* **totalTip:** Bonus portion of payout
+#### Example
+```
+{
+  "apiString": "PSR",
+  "dataSymbol": "PSR",
+  "queryHash": "0x91791f339a108cc51810558511858b09e35f6deba14e2c05488a31097fe73879",
+  "granularity": "1000",
+  "requestQPosition": "0",
+  "totalTip": "0"
+}
+```
+
+## GET /dispute/:disputeID
+Get information about a dispute.
+### Request
+* **disputeID:** The dispute ID to request
+#### Example
+```
+curl http://api.tellorscan.com/dispute/19
+```
+### Response
+* **hash:** Unique hash of dispute: keccak256(miner,requestId,timestamp)
+* **executed:** True if the dispute settled
+* **isPropFork:** True for fork proposal
+* **reportedMiner:** Miner who allegedly submitted the 'bad value'
+* **reportingParty:** Miner reporting the 'bad value'-pay disputeFee will get reportedMiner's stake if dispute vote passes
+* **proposedForkAddress:** New fork address (if fork proposal)
+* **requestId:** Information about the request including:
+  * RequestID of disputed value
+  * Timestamp of disputed value
+  * The value being disputed
+  * 7 days from when dispute initialized
+  * The number of parties who have voted on the measure
+  * The block number for which votes will be calculated from
+  * Index in dispute array
+  * Fee paid corresponding to dispute
+
+#### Example
+```
+{
+  "hash": "0xb35fa004279a349e13b80e9dbeeb144d6f30463866833c331d27d1b95fa9d326",
+  "executed": true,
+  "disputeVotePassed": true,
+  "isPropFork": false,
+  "reportedMiner": "0x103348C47fFc3254aFf761894e7C13cA0C680465",
+  "reportingParty": "0xbABca74dB0D4dBCb7EBC89728452CeAC807615A0",
+  "proposedForkAddress": "0x0000000000000000000000000000000000000000",
+  "requestId": [
+    "3",
+    "1572377640",
+    "187880",
+    "1572985087",
+    "2",
+    "8836057",
+    "4",
+    "80352476817699999998000",
+    "510000000000000000000"
+  ],
+  "timestamp": "80352476817699999998000"
+  }
+```
+
 
 ## To test:
 
@@ -31,7 +171,7 @@ Requirements: Node.js version 9.2.0
     * For example: http://localhost:5000/price/1
 * To get dispute inforamtion for a specific disputeId:  http://localhost:5000/dispute/:disputeID
 
-## Custom API 
+## Custom API
 Use the following hashes to read data from Tellor's contract.
 
 ### Common Hashes:
