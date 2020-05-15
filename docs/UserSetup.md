@@ -1,4 +1,4 @@
-## Integrate Tellor
+## Tellor Integration
 
 To integrate Tellor as your smart contracts' source of data you need to integrate the user contract, UsingTellor.sol into your smart contract.
 
@@ -9,14 +9,14 @@ To quickly install Tellor for testing into your project run the following comman
 
    npm install usingtellor
 
-
 ## Sample Repo
 
 [https://github.com/tellor-io/sampleUsingTellor](https://github.com/tellor-io/sampleUsingTellor)
 
-## Using Tellor Descriptions
+## Integration Instructions
 
-<br>
+Import UsingTellor.sol into your smart contract and ensure your contract inherits from it by adding "is UsingTellor".
+
 <details>
   <summary>Click to view UsingTellor.sol!</summary>
 
@@ -129,10 +129,6 @@ contract UsingTellor is EIP2362Interface{
 </details>
 <br>
 
-## Instructions
-
-Import UsingTellor.sol into your smart contract and ensure your contract inherits from it by adding "is UsingTellor".
-
 Through your contract's constructor function pass through the tellor address to the UsingTellor.sol contract similar to the contstructor function shown below.
 
 You'll also need to know what tellor ID you are querying in order to get the correct data.  For a list of what data is available, you can check here:
@@ -162,9 +158,6 @@ Now you have access to three functions:
     function getDataBefore(uint256 _requestId, uint256 _timestamp) public view returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
 
 ```
-
-
-<b>Instructions:</b> 
 
 ###Tellor Migrations file:
 
