@@ -13,7 +13,7 @@ Mainnet Address- [0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5](https://etherscan.
 
 Rinkeby Address- [0xFe41Cb708CD98C5B20423433309E55b53F79134a](https://rinkeby.etherscan.io/address/0xFe41Cb708CD98C5B20423433309E55b53F79134a)
 
-To figure out how much tip to add to ensure y your request is next on queue, these functions can be ran:
+To figure out how much tip to add to ensure your request is next on queue, these functions can be used:
 
 1) Check where your request sits on the queue and tip associated with it by calling the getRequestVars function.
 
