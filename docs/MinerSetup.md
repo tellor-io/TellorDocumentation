@@ -29,10 +29,17 @@ wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/config.json
 ```
 Now, edit the `config.json`, be sure to update these values:
 1. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
-2. Set `privateKey` to the private key for the Ethereum wallet you plan to use
 3. Set `publicAddress` to the public key for the Ethereum wallet you plan to use (note no "0x" prefix)
 4. Set `serverWhitelist` so that it includes your `publicAddress` (this whitelists your miner to use your local dataServer)
 5. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
+
+## Create .env file
+
+Create a file named .env and put your private key in it. Example:
+
+```
+ETH_PRIVATE_KEY="3a10b4bc1258e8bfefb95b498fb8c0f0cd6964a811eabca87df56xxxxxxxxxxxx"
+````
 
 ### Utilizing your GPU
 Your GPU is enabled by default, but to edit any of the specifics of the configuration, edit the following line in your `config.json` file:
@@ -73,17 +80,29 @@ If you wish to tweak the variables for performance, do so at your own risk:
             disabled: boolean on whether or not to disable a specific GPU
 
 
-## Download the PSR and Logging Config Files
-The `psr.json` file contains information about the different request and associated URLs. Download the latest version:
+## Download the API list and Logging Config Files
+The `indexes.json` file contains information about the different API's that you query for price information.  Download the latest version:
 ```
-wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/psr.json
+- wget https://raw.githubusercontent.com/tellor-io/TellorMiner/dev/indexes.json
 
 ```
+If you would like to add API's or change the API's specified, feel free to add to or change those listed in the file. (e.g. if you can't query binance api's, you can change them out for an autheticated API call (with parsing) to a different exchange). 
+
+
 The `loggingConfig.json` file contains information about the levels of logging in your terminal. Download the latest version:
 ```
 wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/loggingConfig.json
 
 ```
+
+## Manual Data Entry
+
+Tellor currently has one data point which must be manually created.  The rolling 3 month average of the US PCE .  Updated monthly:  [https://apps.bea.gov/iTable/iTable.cfm?reqid=19&step=3&isuri=1&1921=survey&1903=84#reqid=19&step=3&isuri=1&1921=survey&1903=84]( https://apps.bea.gov/iTable/iTable.cfm?reqid=19&step=3&isuri=1&1921=survey&1903=84#reqid=19&step=3&isuri=1&1921=survey&1903=84)
+
+```
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/dev/manualData.json
+```
+
 ## Start Mining
 Tellor is a staked miner. You will need 1000 TRB to mine. Additionally, TellorMiner requires that you run a dataServer process and a miner process. The instructions below can be used to get started.
 
@@ -105,9 +124,10 @@ Here is some information about the TellorMiner for reference.
 
 ### Required Flags
 * **--config** (path to your config file)
-* **--logConfig** (path to your loggingConfig file)
+
 
 ### Commands
+* **--logConfig** (location of logging config file; default path is current directory)
 * **mine** (indicates to run the miner)
 * **mine -r** (indicates to mine utilizing a remote server)
 * **dataserver** (indicates to run the dataServer (no mining))
