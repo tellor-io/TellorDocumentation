@@ -8,7 +8,12 @@ As a user you will need two actions: 1) incentivize miners to add your data on-c
 
 To view the queue and tip and add tip to a data request go to TellorData at [http://prices.tellorscan.com/](http://prices.tellorscan.com/).
 
-Alternatively, addTip can also be called directly from a smart contract. To figure out how much tip to add to ensure y your request is next on queue, these functions can be ran:
+Alternatively, addTip can also be called directly from Tellor. 
+Mainnet Address- [0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5](https://etherscan.io/address/0x0ba45a8b5d5575935b8158a88c631e9f9c95a2e5)
+
+Rinkeby Address- [0xFe41Cb708CD98C5B20423433309E55b53F79134a](https://rinkeby.etherscan.io/address/0xFe41Cb708CD98C5B20423433309E55b53F79134a)
+
+To figure out how much tip to add to ensure y your request is next on queue, these functions can be ran:
 
 1) Check where your request sits on the queue and tip associated with it by calling the getRequestVars function.
 
