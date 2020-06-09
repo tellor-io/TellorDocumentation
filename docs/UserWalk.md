@@ -4,7 +4,7 @@ Tellor's native currency, TRB, is an ERC20 token that also keeps checkpoint bala
 
 Tellor is deployed in mainnet and Rinkeby testnet. You can get TRB through several decentralized exchanges. For Rinkeby testnet tokens contact us at info@tellor.io.
 
-Using Tellor requires two actions: 1) incentivize miners to add your data on-chain using "addTip" function 2) read data using the read function in the [UserSetup](./UserSetup.md).
+Using Tellor requires two actions: 1) incentivize miners to add your data on-chain using "addTip" function 2) read data using the read functions in the [UserSetup](./UserSetup.md).
 
 To view the queue and tip and add tip to a data request go to TellorData at [http://prices.tellorscan.com/](http://prices.tellorscan.com/).
 
@@ -32,5 +32,3 @@ Use the "addTip" function to bring the requestId to the top of the queue (next o
 ```solidity
     addTip(uint _requestId, uint _tip)
 ```
-
-
