@@ -47,6 +47,7 @@ beginDispute(uint256 _requestId, uint256 _timestamp, uint256 _minerIndex)
 ``` 
 
 * vote
+
 After a dispute is initiated. Use this function to vote on the validity of the data. 
 
 ```solidity
@@ -54,6 +55,7 @@ vote(uint256 _disputeId, bool _supportsDispute)
 ```
 
 * tallyVotes
+
 Once the dispute period has passed anyone can run the tallyVotes function. This function tallies the votes and pays out either the miner or the party that initiated the dispute. 
 
 ```solidity
