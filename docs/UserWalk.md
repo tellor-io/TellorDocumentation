@@ -27,14 +27,14 @@ getRequestVars(uint256 _requestId)getRequestVars(uint256 _requestId) external vi
 getVariablesOnDeck() external view returns (uint256 _requestId, uint256 _tip)
 ```
 
-* Use the "addTip" function to bring the requestId to the top of the queue (next on queue is alays the requestId with the highest tip)
+* Use the "addTip" function to bring the requestId to the top of the queue (next on queue is always the requestId with the highest tip)
 
 ```solidity
     addTip(uint _requestId, uint _tip)
 ```
 
 ### Disputes
-The validity of the data can be disputed by any TRB holder for a fee. TRB holders vote on the validity of the data and if the miner is found to be malicious their stake goes to the party that initiated the dispute, otherwise the dispute fee goes to the miner. If you believe the data is invalid, initiate a dispute. However, you do not need to wait for the dispute to be voted on to use the data, simply addTip to your required request and the data will be added on-chain soon after(aproximately 10 mins).
+The validity of the data can be disputed by any TRB holder for a fee. TRB holders vote on the validity of the data and if the miner is found to be malicious their stake goes to the party that initiated the dispute, otherwise the dispute fee goes to the miner. If you believe the data is invalid, initiate a dispute. However, you do not need to wait for the dispute to be voted on to use the data, simply addTip to your required request and the data will be added on-chain soon after(approximately 10 mins).
 
 To initiate a dispute use our dispute center at [http://disputes.tellorscan.com/](http://disputes.tellorscan.com/)
 
@@ -54,7 +54,7 @@ vote(uint256 _disputeId, bool _supportsDispute)
 ```
 
 * tallyVotes
-Once the dispute period has passed anyone can run the tallyVotes function. This fuction tallies the votes and pays out either the miner or the party that initiated the dispute. 
+Once the dispute period has passed anyone can run the tallyVotes function. This function tallies the votes and pays out either the miner or the party that initiated the dispute. 
 
 ```solidity
 tallyVotes(uint256 _disputeId)
