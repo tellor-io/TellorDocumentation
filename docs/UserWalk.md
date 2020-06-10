@@ -59,3 +59,4 @@ Once the dispute period has passed anyone can run the tallyVotes function. This 
 ```solidity
 tallyVotes(uint256 _disputeId)
 ```
+
