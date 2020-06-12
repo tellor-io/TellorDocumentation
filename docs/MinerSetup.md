@@ -4,7 +4,9 @@ This is the workhorse of the Miner system as it takes on solving the PoW challen
 
 It's built on Go and utilizes a split structure.  The database piece is a LevelDB that keeps track of all variables (challenges, difficulty, values to submit, etc.) and the miner simply solves the PoW challenge.  This enables parties to split the pieces for optimization.
 
-**The Tellor system is a way to push data on-chain.  What the pieces of data are are specificied in the psr.json file. Note that the data corresponds to a specific API.  The tellor mining system is set up to pull api data to generate these values to submit on-chain once a correct nonce is mined. These specific apis are just suggestions.  The system is not guarunteed to work for everyone.  It is up to the consnesus of the Tellor token holders to determine what a correct value is. As an example, request ID 4 is BTC/USD.  If the api's all go down, it is the responsibility of the miner to still submit a valid BTC/USD price.  If they do not, they risk being disputed and slashed.  For these reasons, please contribute openly to the official Tellor miner (or an open source variant), as consensus here is key.  If you're miner gets a different value than the majority of the of the other miners, you risk being punished.**
+**The Tellor system is a way to push data on-chain.  What the pieces of data are are specificied in the psr.json file. Note that the data corresponds to a specific API.  The tellor mining system is set up to pull api data to generate these values to submit on-chain once a correct nonce is mined. These specific apis are just suggestions.** 
+
+**The system is not guarunteed to work for everyone.  It is up to the consnesus of the Tellor token holders to determine what a correct value is. As an example, request ID 4 is BTC/USD.  If the api's all go down, it is the responsibility of the miner to still submit a valid BTC/USD price.  If they do not, they risk being disputed and slashed.  For these reasons, please contribute openly to the official Tellor miner (or an open source variant), as consensus here is key.  If you're miner gets a different value than the majority of the of the other miners, you risk being punished.**
 
 A list of all PSR's and the data expected can be found here: [https://docs.google.com/spreadsheets/d/1rRRklc4_LvzJFCHqIgiiNEc7eo_MUw3NRvYmh1HyV14](https://docs.google.com/spreadsheets/d/1rRRklc4_LvzJFCHqIgiiNEc7eo_MUw3NRvYmh1HyV14)
 
@@ -28,10 +30,14 @@ Start by downloading the sample configuration file:
 wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/config.json
 ```
 Now, edit the `config.json`, be sure to update these values:
+
 1. Set `nodeUrl` to an Ethereum node endpoint (e.g. Infura API endpoint)
-3. Set `publicAddress` to the public key for the Ethereum wallet you plan to use (note no "0x" prefix)
-4. Set `serverWhitelist` so that it includes your `publicAddress` (this whitelists your miner to use your local dataServer)
-5. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
+
+2. Set `publicAddress` to the public key for the Ethereum wallet you plan to use (note no "0x" prefix)
+
+3. Set `serverWhitelist` so that it includes your `publicAddress` (this whitelists your miner to use your local dataServer)
+
+4. Add `requestData` and set the value to `0` so you're not constantly requesting data from Tellor
 
 ## Create .env file
 
@@ -39,7 +45,7 @@ Create a file named .env and put your private key in it. Example:
 
 ```
 ETH_PRIVATE_KEY="3a10b4bc1258e8bfefb95b498fb8c0f0cd6964a811eabca87df56xxxxxxxxxxxx"
-````
+```
 
 ### Utilizing your GPU
 Your GPU is enabled by default, but to edit any of the specifics of the configuration, edit the following line in your `config.json` file:
