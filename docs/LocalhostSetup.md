@@ -217,6 +217,8 @@ The stakes have already been deposited for these Addresses so you can now move o
 
 ### Starting the Miners and Data Server
 You can do this in 6 separate terminals locally. Run each of the command in each of the terminals and confirm they start up correctly.
+
+
 | Terminal # | Command                                                  | Description    |
 |------------|----------------------------------------------------------|----------------|
 | 1          | ./TellorMiner --config=config-dataserver.json dataserver | Data Server    |
