@@ -24,10 +24,10 @@ Import UsingTellor.sol into your smart contract and ensure your contract inherit
 pragma solidity ^0.5.0;
 
 import "../contracts/testContracts/TellorMaster.sol";
-import "./OracleIDDescriptions.sol";
-import "../contracts/interfaces/EIP2362Interface.sol";
 import "../contracts/libraries/TellorLibrary.sol";//imported for testing ease
 import "../contracts/testContracts/Tellor.sol";//imported for testing ease
+import "./OracleIDDescriptions.sol";
+import "../contracts/interfaces/EIP2362Interface.sol";
 
 /**
 * @title UserContract
@@ -55,7 +55,7 @@ contract UsingTellor is EIP2362Interface{
     /*Functions*/
     /*
     * @dev Allows the owner to set the address for the oracleID descriptors
-    * used by the ADO members for price key value pairs standarization 
+    * used by the ADO members for price key value pairs standarization
     * _oracleDescriptors is the address for the OracleIDDescriptions contract
     */
     function setOracleIDDescriptors(address _oracleDescriptors) external {
@@ -71,23 +71,23 @@ contract UsingTellor is EIP2362Interface{
     * @return bool true if it is able to retreive a value, the value, and the value's timestamp
     */
     function getCurrentValue(uint256 _requestId) public view returns (bool ifRetrieve, uint256 value, uint256 _timestampRetrieved) {
-        return getDataBefore(_requestId,now);
+        return getDataBefore(_requestId,now,1,0);
     }
 
     /**
-    * @dev Allows the user to get the latest value for the requestId specified using the 
+    * @dev Allows the user to get the latest value for the requestId specified using the
     * ADO specification for the standard inteface for price oracles
     * @param _bytesId is the ADO standarized bytes32 price/key value pair identifier
     * @return the timestamp, outcome or value/ and the status code (for retreived, null, etc...)
     */
-    function valueFor(bytes32 _bytesId) view external returns (int value, uint256 timestamp, uint status) {
+    function valueFor(bytes32 _bytesId) external view returns (int value, uint256 timestamp, uint status) {
         uint _id = descriptions.getTellorIdFromBytes(_bytesId);
         int n = descriptions.getGranularityAdjFactor(_bytesId);
         if (_id > 0){
             bool _didGet;
             uint256 _returnedValue;
             uint256 _timestampRetrieved;
-            (_didGet,_returnedValue,_timestampRetrieved) = getDataBefore(_id,now);
+            (_didGet,_returnedValue,_timestampRetrieved) = getDataBefore(_id,now,1,0);
             if(_didGet){
                 return (int(_returnedValue)*n,_timestampRetrieved, descriptions.getStatusFromTellorStatus(1));
             }
@@ -99,31 +99,31 @@ contract UsingTellor is EIP2362Interface{
     }
 
     /**
-    * @dev Allows the user to get the first value for the requestId after the specified timestamp
+    * @dev Allows the user to get the first value for the requestId before the specified timestamp
     * @param _requestId is the requestId to look up the value for
-    * @param _timestamp after which to search for first verified value
+    * @param _timestamp before which to search for first verified value
+    * @param _limit a limit on the number of values to look at
+    * @param _offset the number of values to go back before looking for data values
     * @return bool true if it is able to retreive a value, the value, and the value's timestamp
     */
-    function getDataBefore(uint256 _requestId, uint256 _timestamp)
+    function getDataBefore(uint256 _requestId, uint256 _timestamp, uint256 _limit, uint256 _offset)
         public
         view
         returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
     {
-        uint256 _count = _tellorm.getNewValueCountbyRequestId(_requestId);
+        uint256 _count = _tellorm.getNewValueCountbyRequestId(_requestId) - _offset;
         if (_count > 0) {
-            for (uint256 i = 1; i <= _count; i++) {
+            for (uint256 i = _count; i > _count - _limit; i--) {
                 uint256 _time = _tellorm.getTimestampbyRequestIDandIndex(_requestId, i - 1);
-                if (_time <= _timestamp && _tellorm.isInDispute(_requestId,_time) == false) {
-                    _timestampRetrieved = _time;
+                if (_time > 0 && _time <= _timestamp && _tellorm.isInDispute(_requestId,_time) == false) {
+                    return (true, _tellorm.retrieveData(_requestId, _time), _time);
                 }
-            }
-            if (_timestampRetrieved > 0) {
-                return (true, _tellorm.retrieveData(_requestId, _timestampRetrieved), _timestampRetrieved);
             }
         }
         return (false, 0, 0);
     }
 }
+
 
 ```
 </details>
@@ -154,8 +154,8 @@ Now you have access to three functions:
     //retrieves current value in EIP2362 format
     function valueFor(bytes32 _bytesId) view external returns (int value, uint256 timestamp, uint status)
 
-    //retrieves qualified data before (e.g. now - 1 hours) in order to wait for disputes/checks
-    function getDataBefore(uint256 _requestId, uint256 _timestamp) public view returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
+    //retrieves qualified data before the specified timestamp (in order to wait for disputes/checks) and limits the amount of values to look back into
+    function getDataBefore(uint256 _requestId, uint256 _timestamp, uint256 _limit, uint256 _offset) public view returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
 
 ```
 
