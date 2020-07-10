@@ -111,12 +111,19 @@ contract UsingTellor is EIP2362Interface{
         view
         returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
     {
-        uint256 _count = _tellorm.getNewValueCountbyRequestId(_requestId) - _offset;
+        uint256 _count = _tellorm.getNewValueCountbyRequestId(_requestId);
         if (_count > 0) {
-            for (uint256 i = _count; i > _count - _limit; i--) {
+            for (uint256 i = _count - _offset; i < _count -_offset + _limit; i++) {
                 uint256 _time = _tellorm.getTimestampbyRequestIDandIndex(_requestId, i - 1);
-                if (_time > 0 && _time <= _timestamp && _tellorm.isInDispute(_requestId,_time) == false) {
-                    return (true, _tellorm.retrieveData(_requestId, _time), _time);
+                if(_value > 0 && _time > _timestamp){
+                    return(true, _value, _timestampRetrieved);
+                }
+                else if (_time > 0 && _time <= _timestamp && _tellorm.isInDispute(_requestId,_time) == false) {
+                    _value = _tellorm.retrieveData(_requestId, _time);
+                    _timestampRetrieved = _time;
+                    if(i == _count){
+                        return(true, _value, _timestampRetrieved);
+                    }
                 }
             }
         }
@@ -124,10 +131,11 @@ contract UsingTellor is EIP2362Interface{
     }
 }
 
-
 ```
 </details>
 <br>
+
+
 
 Through your contract's constructor function pass through the tellor address to the UsingTellor.sol contract similar to the contstructor function shown below.
 
@@ -145,7 +153,7 @@ Rinkeby Address- [0xFe41Cb708CD98C5B20423433309E55b53F79134a](https://rinkeby.et
 
 ```
 
-Now you have access to three functions: 
+Now you have access to these functions: 
 
 ```
     //retrieves current value for the id
@@ -158,6 +166,13 @@ Now you have access to three functions:
     function getDataBefore(uint256 _requestId, uint256 _timestamp, uint256 _limit, uint256 _offset) public view returns (bool _ifRetrieve, uint256 _value, uint256 _timestampRetrieved)
 
 ```
+
+
+Use the getDataBefore function to pull older data by specifying the date (timetstamp) before which to start to look up a value, the "offset" the starting point(index of array) to begin the lookup (you will need to look up the array length, and once you choose an index, check that the index is before the timestamp specified) and the “limit” how many values to check starting from the offset (you should generally keep this under 100 times, since it basically specifies how many times to loop through and look up). 
+
+
+
+
 
 ###Tellor Migrations file:
 
