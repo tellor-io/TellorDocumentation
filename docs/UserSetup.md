@@ -168,7 +168,7 @@ Now you have access to these functions:
 ```
 
 
-Use the getDataBefore function to pull older data by specifying two parameters to look within. First, the timetstamp which is where the function sets one side of the parameter (most recent) then the "offset" (index of array) which is the starting point to begin the value lookup. You will need to look up the array length, and once you choose an index, check that the index is before the timestamp specified. Lastly, set a “limit," which is how many values to check, starting from the offset. You should generally keep this under 100 times, since it basically specifies how many times to loop through and look up.
+Use the getDataBefore function to pull older data by specifying two parameters to look within. First, the timetstamp which is where the function sets one side of the parameter (most recent) then the "offset" (index of array) which is the starting point to begin the value lookup. You will need to look up the array length, and once you choose an index, check that the index is before the timestamp specified. Lastly, set a “limit," which is how many values to check, starting from the offset and going beyond the chosen timestamp. You should generally keep this under 100 times, since it basically specifies how many times to loop through and look up.
 
 
 
