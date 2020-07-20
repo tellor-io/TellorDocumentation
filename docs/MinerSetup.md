@@ -109,6 +109,17 @@ Tellor currently has one data point which must be manually created.  The rolling
 wget https://raw.githubusercontent.com/tellor-io/TellorMiner/dev/manualData.json
 ```
 
+
+#### Overriding the database / manual data entry
+
+For testing purposes, or if you want to hardcode in a specific value to enter, you can use the manualdata.json file to add manual data for a given requestID. Similar to the manual data structure, you add, the request ID, a given value (with granularity), and a date which the manual data is valid until.  The following example shows request ID 4, inputting a value of 9000 with a 1,000,000 granularity.  Note the date is a unix timestamp. 
+
+    "4":{
+        "VALUE":9000000000,
+        "DATE":1596153600
+    }
+
+
 ## Start Mining
 Tellor is a staked miner. You will need 1000 TRB to mine. Additionally, TellorMiner requires that you run a dataServer process and a miner process. The instructions below can be used to get started.
 
@@ -200,6 +211,7 @@ INFO - logs most information about the mining operation
 WARN - logs all warnings and errors
 ERROR - logs only serious errors
 ```
+
 
 ### Running a remote data server
 

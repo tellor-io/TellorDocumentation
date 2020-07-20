@@ -2,9 +2,9 @@
 These instructions are for installing and running TellorMiner from source on Linux. These have been tested on Ubuntu 18.04.
 
 ## Setup TellorMiner
-### Install Build Essentials
+### Install OS Dependancies
 ```
-apt-get install build-essential
+apt-get install build-essential pkg-config ocl-icd-opencl-dev
 ```
 ### Install Go
 TellorMiner uses go so start by installing go:
@@ -53,16 +53,27 @@ go get -d ./TellorMiner
 cd TellorMiner
 ```
 
-Now you need to generate the opencl files for your build by creating a 'kernelSource.go' file in your pow folder.  To do this:
+Now you need to generate the OpenCL files for your build by creating a `kernelSource.go` file in your `pow` folder.  To do this:
 
 ```
 cd pow
-go generate #should create a kernelSource.go file
-cd ..
-
-# ready to 'go run'  or 'go build'
+go generate
 ```
-At this point, you will be able to run the miner use go if you `cd TellorMiner` and run commands from inside of the `TellorMiner` directory.
+
+### Run TellorMiner
+Copy the config and edit it as needed:
+```
+cp config.json myconfig.json
+vi myconfig.json
+```
+Then run the TellorMiner data server to see that it's working correctly:
+```
+./TellorMiner --config=myconfig.json dataserver
+```
+With the data server running in one terminal, you can run the miner in another:
+```
+./TellorMiner --config=myconfig.json mine -r
+```
 
 ### DISCLAIMER
 
@@ -71,10 +82,10 @@ At this point, you will be able to run the miner use go if you `cd TellorMiner` 
 
     Mining requires you deposit 1000 Tellor Tributes.  These are a security deposity.  If you are a malicious actor (aka submit a bad value), the community can vote to slash your 1000 tokens.  
 
-    Mining also requires submitting on-chain transactions on Ethereum.  These transactions cost gas (ETH) and can sometimes be signifiant if the cost of gas on EThereum is high (i.e. the network is clogged).  Please reach out to the community to find the best tips for keeping gas costs under control or at least being aware of the costs. 
+    Mining also requires submitting on-chain transactions on Ethereum.  These transactions cost gas (ETH) and can sometimes be signifiant if the cost of gas on EThereum is high (i.e. the network is clogged).  Please reach out to the community to find the best tips for keeping gas costs under control or at least being aware of the costs.
 
     If you are building a competing client, please contact us.  A lot of the miner specifications are off-chain and a significant portion of the mining process hinges on the consensus of the Tellor community to determine what proper values are.  Competing clients that change different pieces run the risk of being disputed by the commmunity.  
 
-    There is no guaruntee of profit from mining. 
+    There is no guaruntee of profit from mining.
 
-    There is no promise that Tellor Tributes currently hold or will ever hold any value. 
+    There is no promise that Tellor Tributes currently hold or will ever hold any value.
