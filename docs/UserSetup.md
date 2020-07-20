@@ -177,7 +177,7 @@ Use the getDataBefore function to pull older data by specifying two parameters t
 
 
 
-###Tellor Migrations file:
+### Tellor Migrations file:
 
 * To using truffle migrate with your files you will need a custom migrations file to deploy Tellor along with your contracts.  
 
