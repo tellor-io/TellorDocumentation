@@ -137,7 +137,29 @@ contract UsingTellor is EIP2362Interface{
 
 
 
-Through your contract's constructor function pass through the tellor address to the UsingTellor.sol contract similar to the contstructor function shown below.
+Through your contract's constructor function pass through the tellor address to the UsingTellor.sol contract similar to the contstructor function shown below:
+
+```solidity
+pragma solidity ^0.5.0;
+
+import './UsingTellor.sol';
+
+contract YourContract is UsingTellor{
+ ...
+    constructor(address _userContract) UsingTellor(_userContract) public{
+
+    }   
+    /**
+    * @dev Allows the user to get the latest value for the requestId specified
+    * @param _requestId is the requestId to look up the value for
+    * @return bool true if it is able to retreive a value, the value, and the value's timestamp
+    */
+    function getLastValue(uint256 _requestId) public view returns (bool ifRetrieve, uint256 value, uint256 _timestampRetrieved) {
+        return getCurrentValue(_requestId);
+    }
+ ...
+}
+```
 
 You'll also need to know what tellor ID you are querying in order to get the correct data.  For a list of what data is available, you can check here:
 [https://docs.google.com/spreadsheets/d/1rRRklc4_LvzJFCHqIgiiNEc7eo_MUw3NRvYmh1HyV14](https://docs.google.com/spreadsheets/d/1rRRklc4_LvzJFCHqIgiiNEc7eo_MUw3NRvYmh1HyV14)
