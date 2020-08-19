@@ -21,7 +21,7 @@ wget https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMin
 
 Download executable file: 
 
-[https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner.exe](https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner.exe)
+[https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner](https://github.com/tellor-io/TellorMiner/releases/latest/download/TellorMiner)
 
 
 ## Update the Miner Configuration File
