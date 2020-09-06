@@ -2,12 +2,12 @@
 This document covers how to vote on disputes.
 
 # About Voting
-TRB holders vote on the validity of the data and if the miner is found to be _malicious_ their stake goes to the party that initiated the dispute, otherwise the dispute fee goes to the miner.
+TRB holders vote on the validity of the data and if the miner is found to be malicious their stake goes to the party that initiated the dispute, otherwise the dispute fee goes to the miner.
 
 # Prerequsites
 * You will need Metamask browser wallet or a similar web-based wallet to connect.
-* You must be holding the TRB you will use to vote _prior_ to the dispute being created. This prevents someone from just buying TRB to over turn a dispute after being disputed.
-* TRB you use to vote with is _not_ at risk of being lost due to the outcome of the vote.
+* You must be holding the TRB you will use to vote prior to the dispute being created. This prevents someone from just buying TRB to over turn a dispute after being disputed.
+* TRB you use to vote with is not at risk of being lost due to the outcome of the vote.
 
 # Steps for Disputing
 1. Go to https://disputes.tellorscan.com
