@@ -18,6 +18,7 @@ nav:
       - 'Miner Implementation-From Source':  'MinerSetupFromSource.md'
       - 'Miner Implementation-Pool Mining':  'MinerSetupPool.md'
 #- Data Sources Supported: 'DataSources.md'
+- Voting: 'Voting.md'
 - Creating API for Tellor data: "TellorApi.md"
 - Functions:
     - 'Deploying Tellor': 'DevDocumentation.md'
