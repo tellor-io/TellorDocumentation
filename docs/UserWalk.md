@@ -18,7 +18,7 @@ Alternatively, "addTip" can also be called directly from Tellor. These functions
 * Use the "getRequestVars" function to Check where your request sits on the queue and tip associated with it.
 
 ```solidity
-getRequestVars(uint256 _requestId)getRequestVars(uint256 _requestId) external view returns (uint256 index, uint256 tip) 
+getRequestVars(uint256 _requestId) external view returns (uint256 index, uint256 tip) 
 ```
 
 * Use the "getVariablesOnDeck()" function to check the tip associated with the requestId on deck(next to be mined)
