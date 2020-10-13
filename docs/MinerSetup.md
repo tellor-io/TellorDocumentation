@@ -27,7 +27,7 @@ Download executable file:
 ## Update the Miner Configuration File
 Start by downloading the sample configuration file:
 ```
-wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/config.json
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/configs/config.json
 ```
 Now, edit the `config.json`, be sure to update these values:
 
@@ -89,7 +89,7 @@ If you wish to tweak the variables for performance, do so at your own risk:
 ## Download the API list and Logging Config Files
 The `indexes.json` file contains information about the different API's that you query for price information.  Download the latest version:
 ```
-- wget https://raw.githubusercontent.com/tellor-io/TellorMiner/dev/indexes.json
+- wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/configs/indexes.json
 
 ```
 If you would like to add API's or change the API's specified, feel free to add to or change those listed in the file. (e.g. if you can't query binance api's, you can change them out for an autheticated API call (with parsing) to a different exchange). 
@@ -97,7 +97,7 @@ If you would like to add API's or change the API's specified, feel free to add t
 
 The `loggingConfig.json` file contains information about the levels of logging in your terminal. Download the latest version:
 ```
-wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/loggingConfig.json
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/configs/loggingConfig.json
 
 ```
 
@@ -106,7 +106,7 @@ wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/loggingConfi
 Tellor currently has one data point which must be manually created.  The rolling 3 month average of the US PCE .  Updated monthly:  [https://apps.bea.gov/iTable/iTable.cfm?reqid=19&step=3&isuri=1&1921=survey&1903=84#reqid=19&step=3&isuri=1&1921=survey&1903=84]( https://apps.bea.gov/iTable/iTable.cfm?reqid=19&step=3&isuri=1&1921=survey&1903=84#reqid=19&step=3&isuri=1&1921=survey&1903=84)
 
 ```
-wget https://raw.githubusercontent.com/tellor-io/TellorMiner/dev/manualData.json
+wget https://raw.githubusercontent.com/tellor-io/TellorMiner/master/configs/manualData.json
 ```
 
 

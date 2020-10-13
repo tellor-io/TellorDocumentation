@@ -9,7 +9,7 @@ Download the Linux or Windows executable and place it into a directory on your c
 ## Create a Configuration File
 Next, you will need to create a `config.json` file in the same directory as the TellorMiner executable.
 
-Start by copying this [config.json](https://github.com/tellor-io/TellorMiner/blob/master/config.json) file that is checked into the TellorMiner GitHub repository.
+Start by copying this [config.json](https://github.com/tellor-io/TellorMiner/blob/master/configs/config.json) file that is checked into the TellorMiner GitHub repository.
 
 ### Edit the Configuration File
 Change the following configuration options:
@@ -38,7 +38,7 @@ Where the `POOL_URL` is the link to your pool. Current Tellor mining pools:
 ## Create a Logging Configuration File
 Next, you will need to create a `loggingConfig.json` file in the same directory as the TellorMiner executable.
 
-Start by copying this [loggingConfig.json](https://github.com/tellor-io/TellorMiner/blob/master/loggingConfig.json) file that is checked into the TellorMiner GitHub repository.
+Start by copying this [loggingConfig.json](https://github.com/tellor-io/TellorMiner/blob/master/configs/loggingConfig.json) file that is checked into the TellorMiner GitHub repository.
 
 ## Run the TellorMiner
 Now run the miner, on Linux:
